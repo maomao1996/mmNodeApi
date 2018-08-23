@@ -13,7 +13,7 @@ module.exports = class Route {
         const path = this.name.replace(/_/g, '/');
         this.router.get('/qq', fnQQ(require(`../routes/${this.name}/qq.js`)));
         this.router.get('/163', fnNetease(require(`../routes/${this.name}/163.js`)));
-        this.router.redirect(`/${path}`, `/${path}/qq`);
+        this.router.redirect(`/`, `/${path}/qq`);
         return this.router;
     }
 };

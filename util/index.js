@@ -8,7 +8,7 @@ const commonParams = {
 };
 
 // QQ 请求成功状态码
-const OK_QQ = 200;
+const OK_QQ = 0;
 
 // 网易 请求成功状态码
 const OK_163 = 200;
