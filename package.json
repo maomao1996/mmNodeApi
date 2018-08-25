@@ -2,7 +2,6 @@
 	"name": "mmnodeapi",
 	"version": "0.1.0",
 	"description": "node music api",
-	"main": "index.js",
 	"scripts": {
 		"start": "node app.js"
 	},
@@ -12,11 +11,10 @@
 	},
 	"keywords": [],
 	"author": "maomao1996 <1714487678@qq.com>",
-	"license": "ISC",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/maomao1996/mmNodeApi/issues"
 	},
-	"homepage": "https://github.com/maomao1996/mmNodeApi#readme",
 	"dependencies": {
 		"axios": "^0.18.0",
 		"big-integer": "^1.6.34",
