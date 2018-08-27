@@ -1,8 +1,8 @@
-const { formatSearchHot } = require('../../model/index.js');
+const { formatTopList } = require('../../model/index.js');
 const config = require('../../config/index.js');
 const { Tips, commonParams, OK_QQ } = require('../../util/index.js');
 
-// 热搜 QQ
+// 排行榜 QQ
 
 module.exports = async (ctx, next, axios) => {
     const ft = ctx.query.format || config.format;
@@ -11,10 +11,10 @@ module.exports = async (ctx, next, axios) => {
         uin: 0,
         needNewCode: 1
     });
-    await axios('/splcloud/fcgi-bin/gethotkey.fcg', 'get', params)
+    await axios('/v8/fcg-bin/fcg_myqq_toplist.fcg', 'get', params)
         .then(res => {
             if (res.code === OK_QQ) {
-                const data = ft === 'open' ? formatSearchHot(res.data.hotkey, 'QQ') : res.data.hotkey;
+                const data = ft === 'open' ? formatTopList(res.data.topList, 'QQ') : res.data.topList;
                 ctx.body = {
                     data,
                     ...Tips['qq']
