@@ -4,12 +4,12 @@ const { Tips, OK_163 } = require('../../util/index.js');
 
 // 热搜 网易
 
-module.exports = async (ctx, next, netease, axios) => {
+module.exports = async (ctx, next, axios) => {
     const ft = ctx.query.format || config.format;
     const params = {
         type: 1111
     };
-    await netease('/weapi/search/hot', 'post', params)
+    await axios('/weapi/search/hot', 'post', params)
         .then(res => {
             const { code, result } = res;
             if (code === OK_163) {

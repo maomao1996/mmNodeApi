@@ -1,15 +1,12 @@
 const fs = require('fs');
 const Router = require('koa-router');
-const { qq, netease, axios } = require('./axios/index.js');
+const axios = require('./axios/index.js');
+const { musicType } = require('../config/index.js');
 
 // 路由包装函数
 const func = (fn, type) => {
-    switch (type) {
-    case 'qq':
-        return (ctx, next) => fn(ctx, next, qq, axios);
-    case '163':
-        return (ctx, next) => fn(ctx, next, netease, axios);
-    }
+    const t = type === '163' ? 'netease' : type;
+    return (ctx, next) => fn(ctx, next, axios[t]);
 };
 
 /**
@@ -31,7 +28,7 @@ module.exports = class Route {
                 const fileName = file.replace(/.js/, '');
                 this.router.get(`/${fileName}`, func(require(`../routes/${this.name}/${file}`), fileName));
             });
-        this.router.redirect(`/`, `/${path}/qq`);
+        this.router.redirect('/', `/${path}/${musicType}`);
         return this.router;
     }
 };
