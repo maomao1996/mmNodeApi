@@ -14,8 +14,6 @@ const qq = axios.create({
     }
 });
 
-qq.interceptors.response.use(response => response.data, error => Promise.reject(error));
-
 // QQ请求配置
 function qqAxios (url, method, data, headers = {}) {
     const options = {
@@ -42,8 +40,6 @@ const netease = axios.create({
     }
 });
 
-netease.interceptors.response.use(response => response.data, error => Promise.reject(error));
-
 // 网易云请求配置
 function neteaseAxios (url, method, data, headers = {}) {
     const cryptoreq = Encrypt(data);
@@ -59,6 +55,10 @@ function neteaseAxios (url, method, data, headers = {}) {
     console.log(`[neteaseAxios] ${options.method} ${options.url}`);
     return netease(options);
 }
+
+[qq, netease].forEach(item => {
+    item.interceptors.response.use(response => response.data, error => Promise.reject(error));
+});
 
 module.exports = {
     qq: qqAxios,
