@@ -22,7 +22,6 @@ function qqAxios (url, method, data, headers = {}) {
         headers,
         [`${method === 'get' ? 'params' : 'data'}`]: data
     };
-    console.log(`[qqAxios] ${options.method} ${options.url}`);
     return qq(options);
 }
 
@@ -52,12 +51,17 @@ function neteaseAxios (url, method, data, headers = {}) {
             encSecKey: cryptoreq.encSecKey
         })
     };
-    console.log(`[neteaseAxios] ${options.method} ${options.url}`);
     return netease(options);
 }
 
 [qq, netease].forEach(item => {
-    item.interceptors.response.use(response => response.data, error => Promise.reject(error));
+    item.interceptors.response.use(
+        response => {
+            console.log(`${response.config.method} ${response.config.url}`);
+            return response.data;
+        },
+        error => Promise.reject(error)
+    );
 });
 
 module.exports = {
