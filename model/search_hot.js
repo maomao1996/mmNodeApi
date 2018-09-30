@@ -5,17 +5,12 @@
   */
 
 module.exports = function formatSearchHot (data, type) {
-    let newData;
     switch (type) {
     case 'QQ':
-        newData = data.map(item => item.k);
-        break;
+        return data.map(item => item.k);
     case '163':
-        newData = data.map(item => item.first);
-        break;
+        return data.map(item => item.first);
     default:
-        newData = data;
-        break;
+        return data;
     }
-    return newData;
 };
