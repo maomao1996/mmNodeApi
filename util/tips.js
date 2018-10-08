@@ -3,7 +3,7 @@ module.exports = {
         code: 0,
         musicType: 'QQ'
     },
-    '163': {
+    163: {
         code: 0,
         musicType: '163'
     },
