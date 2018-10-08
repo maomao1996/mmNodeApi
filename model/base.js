@@ -19,7 +19,28 @@ class Creator {
     }
 }
 
+// 专辑信息
+class Album {
+    constructor ({ id, mid, name, picUrl }) {
+        this.id = id; // 专辑id
+        this.mid = mid; // 专辑id
+        this.name = name; // 专辑名
+        this.picUrl = picUrl; // 专辑封面
+    }
+}
+
+// 歌手信息
+class Singer {
+    constructor ({ id, mid, name }) {
+        this.id = id; // 歌手id
+        this.mid = mid; // 歌手id
+        this.name = name; // 歌手名
+    }
+}
+
 module.exports = {
     BaseSong,
-    Creator
+    Creator,
+    Album,
+    Singer
 };
