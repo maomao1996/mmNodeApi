@@ -47,8 +47,31 @@
         <p class="desc">NodeJS 版 API</p>
     </header>
 	<main>
-        <ol>
-        </ol>
+        <ol id="container"></ol>
     </main>
+    <script>
+        window.onload = () => {
+            const data = {
+                '热搜': [
+                    '/search/hot/qq',
+                    '/search/hot/163'
+                ],
+                '排行榜': [
+                    '/toplist/qq',
+                    '/toplist/163'
+                ],
+                '排行榜详情': [
+                    '/toplist/detail/qq?id=4',
+                    '/toplist/detail/163?id=3778678'
+                ],
+            }
+            const domArr = Object.keys(data).map(item => {
+                let q = data[item][0] ? `<a href="${data[item][0]}">QQ</a>` : '',
+                n =  data[item][1] ? `&nbsp;/&nbsp;<a href="${data[item][1]}">网易</a>` : ''
+                return `<li>${item}：${q}${n}</li>`
+            })
+            document.querySelector('#container').innerHTML = domArr.join('')
+        }
+    </script>
 </body>
 </html>
