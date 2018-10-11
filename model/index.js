@@ -4,5 +4,7 @@ module.exports = {
     // 排行榜
     formatTopList: require('./toplist.js'),
     // 歌单详情
-    formatPlayListDetail: require('./playlist_detail.js')
+    formatPlayListDetail: require('./playlist_detail.js'),
+    // 歌单列表
+    formatPlayList: require('./playlist.js')
 };
