@@ -34,7 +34,7 @@ class PlayListDetail {
     }
 }
 
-function formatPlayListDetail (data, type) {
+module.exports = function formatPlayListDetail (data, type) {
     switch (type) {
     case 'QQTOP':
         // QQ 排行榜详情
@@ -50,6 +50,26 @@ function formatPlayListDetail (data, type) {
             playCount: null,
             shareCount: null,
             commentCount: data.comment_num,
+            songList: formatSongs(data.songlist, 'QQ')
+        });
+    case 'QQ':
+        // QQ 歌单详情
+        return new PlayListDetail({
+            id: Number(data.disstid),
+            name: data.dissname,
+            picUrl: data.logo,
+            creator: new Creator({
+                uid: data.uin,
+                name: data.nickname,
+                picUrl: data.headurl
+            }),
+            createTime: data.ctime,
+            updateTime: data.update_time,
+            desc: data.desc,
+            songCount: data.total_song_num,
+            playCount: data.visitnum,
+            shareCount: null,
+            commentCount: null,
             songList: formatSongs(data.songlist, 'QQ')
         });
     case '163':
@@ -74,6 +94,4 @@ function formatPlayListDetail (data, type) {
     default:
         return data;
     }
-}
-
-module.exports = formatPlayListDetail;
+};
