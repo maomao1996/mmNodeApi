@@ -6,5 +6,7 @@ module.exports = {
     // 歌单详情
     formatPlayListDetail: require('./playlist_detail.js'),
     // 歌单列表
-    formatPlayList: require('./playlist.js')
+    formatPlayList: require('./playlist.js'),
+    // 歌词
+    Lyric: require('./lyric.js')
 };
