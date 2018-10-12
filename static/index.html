@@ -64,6 +64,18 @@
                     '/toplist/detail/qq?id=4',
                     '/toplist/detail/163?id=3778678'
                 ],
+                '分类歌单': [
+                    '/playlist/qq?limit=10&offset=0',
+                    '/playlist/163?limit=10&offset=0'
+                ],
+                '歌单详情': [
+                    '/playlist/detail/qq?id=4090560302',
+                    '/playlist/detail/163?id=546973478'
+                ],
+                '歌词': [
+                    '/lyric/qq?id=001hUNRP0P8g7x',
+                    '/lyric/163?id=169185'
+                ]
             }
             const domArr = Object.keys(data).map(item => {
                 let q = data[item][0] ? `<a href="${data[item][0]}">QQ</a>` : '',
