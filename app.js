@@ -16,7 +16,7 @@ app.use(cors({ origin: '*' }));
 app.use(koaStatic(path.resolve(__dirname, 'static')));
 
 // 处理 post 请求
-app.use(KoaBody());
+app.use(KoaBody({ multipart: true }));
 
 // 参数校验
 app.use(async (ctx, next) => {
