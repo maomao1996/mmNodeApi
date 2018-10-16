@@ -5,7 +5,7 @@ const { Route } = require('../util/index.js');
 const router = new Router();
 
 // POST 路由映射
-// const POSTRouterFileMap = {}
+const POSTRouterFileMap = ['music_url'];
 
 // 读取 routes 目录中的文件, 根据命名规则自动注册路由
 fs
@@ -14,7 +14,11 @@ fs
     .forEach(file => {
         if (/^(?!.*\.js)/.test(file)) {
             const fileName = file.replace(/_/g, '/');
-            router.use(`/${fileName}`, new Route(file).init().routes());
+            if (POSTRouterFileMap.includes(file)) {
+                router.use(`/${fileName}`, new Route(file, 'post').init().routes());
+            } else {
+                router.use(`/${fileName}`, new Route(file).init().routes());
+            }
         }
     });
 
