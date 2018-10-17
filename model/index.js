@@ -8,5 +8,7 @@ module.exports = {
     // 歌单列表
     formatPlayList: require('./playlist.js'),
     // 歌词
-    Lyric: require('./lyric.js')
+    Lyric: require('./lyric.js'),
+    // 歌曲 URL
+    formatMusicUrl: require('./music_url.js')
 };
