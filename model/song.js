@@ -44,21 +44,21 @@ function formatSongs (data, type) {
     switch (type) {
     case 'QQ':
         return data.reduce((arr, item) => {
-            const data = item.data ? item.data : item;
-            if (data.songid && data.songmid) {
+            const obj = item.data ? item.data : item;
+            if (data.songid && obj.songmid) {
                 arr.push(
                     new Song({
-                        id: data.songid,
-                        mid: data.songmid,
-                        name: data.songname,
-                        singer: data.singer,
+                        id: obj.songid,
+                        mid: obj.songmid,
+                        name: obj.songname,
+                        singer: obj.singer,
                         album: new Album({
-                            id: data.albumid,
-                            mid: data.albummid,
-                            name: data.albumname,
-                            picUrl: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${data.albummid}.jpg?max_age=2592000`
+                            id: obj.albumid,
+                            mid: obj.albummid,
+                            name: obj.albumname,
+                            picUrl: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${obj.albummid}.jpg?max_age=2592000`
                         }),
-                        duration: data.interval,
+                        duration: obj.interval,
                         musicType: 'QQ'
                     })
                 );
