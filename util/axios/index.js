@@ -1,6 +1,6 @@
 const axios = require('axios');
 const querystring = require('querystring');
-const Encrypt = require('./crypto.js');
+const encrypt = require('./crypto.js');
 const { randomUserAgent } = require('../util.js');
 
 // 网络请求配置
@@ -40,16 +40,27 @@ const netease = axios.create({
 });
 
 // 网易云请求配置
-function neteaseAxios (url, method, data, headers = {}) {
-    const cryptoreq = Encrypt(data);
+function neteaseAxios (url, method, data, headers = {}, crypto = 'weapi') {
+    if (crypto === 'weapi') {
+        data = encrypt.weapi(data);
+        url = url.replace(/\w*api/, 'weapi');
+    } else if (crypto === 'linuxapi') {
+        data = encrypt.linuxapi({
+            url: `https://music.163.com${url}`.replace(/\w*api/, 'api'),
+            params: data,
+            method
+        });
+        headers = {
+            'User-Agent':
+				'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36'
+        };
+        url = 'https://music.163.com/api/linux/forward';
+    }
     const options = {
         url,
         method,
         headers,
-        data: querystring.stringify({
-            params: cryptoreq.params,
-            encSecKey: cryptoreq.encSecKey
-        })
+        data: querystring.stringify(data)
     };
     return netease(options);
 }

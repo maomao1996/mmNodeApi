@@ -13,7 +13,7 @@ module.exports = async (ctx, next, axios) => {
         csrf_token: '',
         id
     };
-    await axios('/weapi/v3/playlist/detail', 'post', params)
+    await axios('/weapi/v3/playlist/detail', 'post', params, {}, 'linuxapi')
         .then(res => {
             const { code, playlist } = res;
             if (code === OK_163) {

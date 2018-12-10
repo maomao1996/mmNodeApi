@@ -112,10 +112,6 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/balanced-match/download/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-big-integer@^1.6.34:
-  version "1.6.34"
-  resolved "http://registry.npm.taobao.org/big-integer/download/big-integer-1.6.34.tgz#701affc8f0d73c490930a6b482dc23ed6ffc7484"
-
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "http://registry.npm.taobao.org/brace-expansion/download/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
