@@ -45,7 +45,7 @@ function formatSongs (data, type) {
     case 'QQ':
         return data.reduce((arr, item) => {
             const obj = item.data ? item.data : item;
-            if (data.songid && obj.songmid) {
+            if (obj.songid && obj.songmid) {
                 arr.push(
                     new Song({
                         id: obj.songid,
