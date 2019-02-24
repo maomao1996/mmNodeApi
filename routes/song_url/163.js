@@ -6,7 +6,8 @@ const { Tips, OK_163 } = require('../../util/index.js');
 
 module.exports = async (ctx, next, axios) => {
     const { format: ft = config.format } = ctx.query;
-    const ids = [ctx.request.body.id];
+    const { id } = ctx.request.body;
+    const ids = Array.isArray(id) ? id : JSON.parse(id);
     const params = {
         ids,
         br: 999000,
