@@ -5,7 +5,7 @@ const { Route } = require('../util/index.js');
 const router = new Router();
 
 // POST 路由映射
-const POSTRouterFileMap = ['music_url'];
+const POSTRouterFileMap = ['song_url'];
 
 // 读取 routes 目录中的文件, 根据命名规则自动注册路由
 fs

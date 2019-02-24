@@ -10,5 +10,5 @@ module.exports = {
     // 歌词
     Lyric: require('./lyric.js'),
     // 歌曲 URL
-    formatMusicUrl: require('./music_url.js')
+    formatSongUrl: require('./song_url.js')
 };

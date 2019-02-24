@@ -1,4 +1,4 @@
-const { formatMusicUrl } = require('../../model/index.js');
+const { formatSongUrl } = require('../../model/index.js');
 const config = require('../../config/index.js');
 const { Tips, OK_QQ, commonParams } = require('../../util/index.js');
 
@@ -8,15 +8,16 @@ const getGuid = () => '' + (Math.round(Math.random() * 1e10) * new Date().getUTC
 
 module.exports = async (ctx, next, axios) => {
     const { format: ft = config.format } = ctx.query;
-    const id = ctx.request.body.id.split(',');
-    const types = [];
-    id.forEach(item => {
-        types.push(0);
+    const songmid = JSON.parse(ctx.request.body.id);
+    const songtype = [];
+    songmid.forEach(item => {
+        songtype.push(0);
     });
     const comm = Object.assign({}, commonParams, {
         g_tk: 5381,
         platform: 'h5',
         needNewCode: 1,
+        notice: 0,
         uin: 0
     });
     const guid = getGuid();
@@ -24,12 +25,12 @@ module.exports = async (ctx, next, axios) => {
         module: 'vkey.GetVkeyServer',
         method: 'CgiGetVkey',
         param: {
-            guid,
-            songmid: id,
-            songtype: types,
             uin: '0',
             loginflag: 0,
-            platform: '23'
+            platform: '23',
+            guid,
+            songmid,
+            songtype
         }
     };
     await axios(
@@ -41,7 +42,7 @@ module.exports = async (ctx, next, axios) => {
         .then(res => {
             if (res.code === OK_QQ) {
                 const midurlinfo = res.url_mid.data.midurlinfo;
-                const data = ft === 'open' ? formatMusicUrl(midurlinfo, 'qq') : midurlinfo;
+                const data = ft === 'open' ? formatSongUrl(midurlinfo, 'qq') : midurlinfo;
                 ctx.body = {
                     data,
                     ...Tips['qq']
