@@ -1,4 +1,4 @@
-// QQ 请求参数
+// qq 请求参数
 const commonParams = {
     g_tk: 1928093487,
     inCharset: 'utf-8',
@@ -7,7 +7,7 @@ const commonParams = {
     format: 'json'
 };
 
-// QQ 请求成功状态码
+// qq 请求成功状态码
 const OK_QQ = 0;
 
 // 网易 请求成功状态码

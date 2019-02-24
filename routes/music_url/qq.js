@@ -2,7 +2,7 @@ const { formatMusicUrl } = require('../../model/index.js');
 const config = require('../../config/index.js');
 const { Tips, OK_QQ, commonParams } = require('../../util/index.js');
 
-// 歌曲 URL QQ
+// 歌曲 URL qq
 
 const getGuid = () => '' + (Math.round(Math.random() * 1e10) * new Date().getUTCMilliseconds()) % 1e9;
 
@@ -41,7 +41,7 @@ module.exports = async (ctx, next, axios) => {
         .then(res => {
             if (res.code === OK_QQ) {
                 const midurlinfo = res.url_mid.data.midurlinfo;
-                const data = ft === 'open' ? formatMusicUrl(midurlinfo, 'QQ') : midurlinfo;
+                const data = ft === 'open' ? formatMusicUrl(midurlinfo, 'qq') : midurlinfo;
                 ctx.body = {
                     data,
                     ...Tips['qq']

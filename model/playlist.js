@@ -15,7 +15,7 @@ class PlayList {
 
 module.exports = function formatPlayList (data, type) {
     switch (type) {
-    case 'QQ':
+    case 'qq':
         return data.map(
             item =>
                 new PlayList({

@@ -26,7 +26,7 @@ module.exports = async (ctx, next, axios) => {
         .then(res => {
             if (res.code === OK_QQ) {
                 const { list, sum } = res.data;
-                const data = ft === 'open' ? formatPlayList(list, 'QQ') : list;
+                const data = ft === 'open' ? formatPlayList(list, 'qq') : list;
                 ctx.body = {
                     data,
                     total: sum,

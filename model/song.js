@@ -42,7 +42,7 @@ function filterSinger (singers) {
 // 格式化歌曲数据
 function formatSongs (data, type) {
     switch (type) {
-    case 'QQ':
+    case 'qq':
         return data.reduce((arr, item) => {
             const obj = item.data ? item.data : item;
             if (obj.songid && obj.songmid) {
@@ -59,7 +59,7 @@ function formatSongs (data, type) {
                             picUrl: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${obj.albummid}.jpg?max_age=2592000`
                         }),
                         duration: obj.interval,
-                        musicType: 'QQ'
+                        musicType: 'qq'
                     })
                 );
             }

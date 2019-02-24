@@ -11,7 +11,7 @@ class MusicUrl {
 
 module.exports = function formatMusicUrl (data, type) {
     switch (type) {
-    case 'QQ':
+    case 'qq':
         return data.reduce((arr, item) => {
             arr.push(new MusicUrl({ id: item.songmid, url: item.purl }));
             return arr;

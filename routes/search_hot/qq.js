@@ -2,7 +2,7 @@ const { formatSearchHot } = require('../../model/index.js');
 const config = require('../../config/index.js');
 const { Tips, commonParams, OK_QQ } = require('../../util/index.js');
 
-// 热搜 QQ
+// 热搜 qq
 
 module.exports = async (ctx, next, axios) => {
     const ft = ctx.query.format || config.format;
@@ -14,7 +14,7 @@ module.exports = async (ctx, next, axios) => {
     await axios('/splcloud/fcgi-bin/gethotkey.fcg', 'get', params)
         .then(res => {
             if (res.code === OK_QQ) {
-                const data = ft === 'open' ? formatSearchHot(res.data.hotkey, 'QQ') : res.data.hotkey;
+                const data = ft === 'open' ? formatSearchHot(res.data.hotkey, 'qq') : res.data.hotkey;
                 ctx.body = {
                     data,
                     ...Tips['qq']

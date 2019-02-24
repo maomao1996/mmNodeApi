@@ -2,7 +2,7 @@ const { Lyric } = require('../../model/index.js');
 const config = require('../../config/index.js');
 const { Tips, commonParams, OK_QQ } = require('../../util/index.js');
 
-// 歌词 QQ
+// 歌词 qq
 
 /* eslint-disable */
 MusicJsonCallback_lrc = data => data;

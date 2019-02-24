@@ -1,7 +1,7 @@
 module.exports = {
     qq: {
         code: 0,
-        musicType: 'QQ'
+        musicType: 'qq'
     },
     163: {
         code: 0,

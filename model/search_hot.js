@@ -6,7 +6,7 @@
 
 module.exports = function formatSearchHot (data, type) {
     switch (type) {
-    case 'QQ':
+    case 'qq':
         return data.map(item => item.k);
     case '163':
         return data.map(item => item.first);

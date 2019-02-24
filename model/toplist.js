@@ -16,7 +16,7 @@ class TopList {
 // 格式化热门歌曲
 function formatSongs (data, type) {
     switch (type) {
-    case 'QQ':
+    case 'qq':
         return data.map(
             item =>
                 new BaseSong({
@@ -40,7 +40,7 @@ function formatSongs (data, type) {
 // 排行榜列表格式化
 module.exports = function formatTopList (data, type) {
     switch (type) {
-    case 'QQ':
+    case 'qq':
         return data.map(item => {
             const songs = formatSongs(item.songList, type);
             return new TopList({

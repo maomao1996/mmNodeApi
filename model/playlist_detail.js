@@ -36,8 +36,8 @@ class PlayListDetail {
 
 module.exports = function formatPlayListDetail (data, type) {
     switch (type) {
-    case 'QQTOP':
-        // QQ 排行榜详情
+    case 'qqTOP':
+        // qq 排行榜详情
         return new PlayListDetail({
             id: Number(data.topinfo.topID),
             name: data.topinfo.ListName,
@@ -50,10 +50,10 @@ module.exports = function formatPlayListDetail (data, type) {
             playCount: null,
             shareCount: null,
             commentCount: data.comment_num,
-            songList: formatSongs(data.songlist, 'QQ')
+            songList: formatSongs(data.songlist, 'qq')
         });
-    case 'QQ':
-        // QQ 歌单详情
+    case 'qq':
+        // qq 歌单详情
         return new PlayListDetail({
             id: Number(data.disstid),
             name: data.dissname,
@@ -70,7 +70,7 @@ module.exports = function formatPlayListDetail (data, type) {
             playCount: data.visitnum,
             shareCount: null,
             commentCount: null,
-            songList: formatSongs(data.songlist, 'QQ')
+            songList: formatSongs(data.songlist, 'qq')
         });
     case '163':
         return new PlayListDetail({

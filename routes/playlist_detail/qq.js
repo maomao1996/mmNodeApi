@@ -2,7 +2,7 @@ const { formatPlayListDetail } = require('../../model/index.js');
 const config = require('../../config/index.js');
 const { Tips, commonParams, OK_QQ } = require('../../util/index.js');
 
-// 排行榜 QQ
+// 排行榜 qq
 
 module.exports = async (ctx, next, axios) => {
     const ft = ctx.query.format || config.format;
@@ -20,7 +20,7 @@ module.exports = async (ctx, next, axios) => {
     await axios('/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg', 'get', params)
         .then(res => {
             if (res.code === OK_QQ) {
-                const data = ft === 'open' ? formatPlayListDetail(res.cdlist[0], 'QQ') : res.cdlist[0];
+                const data = ft === 'open' ? formatPlayListDetail(res.cdlist[0], 'qq') : res.cdlist[0];
                 ctx.body = {
                     data,
                     ...Tips['qq']
