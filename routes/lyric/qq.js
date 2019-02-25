@@ -21,14 +21,14 @@ module.exports = async (ctx, next, axios) => {
         callback: 'MusicJsonCallback_lrc',
         pcachetime: +new Date(),
         g_tk: 181969821,
-        songmid: id
+        songmid: id,
+        nobase64: 1
     });
     await axios('/lyric/fcgi-bin/fcg_query_lyric_new.fcg', 'get', params)
         .then(res => {
-			const { code, lyric } = eval(res); // eslint-disable-line
+            const { code, lyric } = eval(res); // eslint-disable-line
             if (code === OK_QQ) {
-                const lrc = Buffer.from(lyric, 'base64').toString();
-                const data = ft === 'open' ? new Lyric(lrc) : lrc;
+                const data = ft === 'open' ? new Lyric(lyric) : lyric;
                 ctx.body = {
                     data,
                     ...Tips['qq']
