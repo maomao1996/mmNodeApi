@@ -6,7 +6,16 @@ const { Tips, OK_163 } = require('../../util/index.js');
 
 module.exports = async (ctx, next, axios) => {
     const { id, format: ft = config.format } = ctx.query;
-    await axios(`/weapi/song/lyric?os=osx&id=${id}&lv=-1&kv=-1&tv=-1`, 'post', {})
+    const params = {
+        id
+    };
+    await axios(
+        '/weapi/song/lyric?lv=-1&kv=-1&tv=-1',
+        'post',
+        params,
+        {},
+        'linuxapi'
+    )
         .then(res => {
             const { code, lrc } = res;
             if (code === OK_163) {
