@@ -1,15 +1,19 @@
 module.exports = {
-    env: {
-        browser: true,
-        commonjs: true,
-        es6: true
-    },
-    extends: 'standard',
-    parserOptions: {
-        sourceType: 'module'
-    },
-    rules: {
-        indent: ['error', 4], // 缩进空格
-        semi: ['error', 'always'] // 关闭分号
-    }
-};
+  env: {
+    commonjs: true,
+    es6: true,
+    node: true
+  },
+  extends: [
+    'standard'
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
+  },
+  parserOptions: {
+    ecmaVersion: 2018
+  },
+  rules: {
+  }
+}
