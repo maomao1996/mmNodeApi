@@ -2,7 +2,7 @@
 exports.PORT = process.env.PORT || 3163
 
 // 是否格式化字段
-exports.format = 'open'
+exports.format = true
 
 // 默认平台
 exports.musicType = 'qq'

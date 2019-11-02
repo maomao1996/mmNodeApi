@@ -13,11 +13,14 @@ const OK_QQ = 0
 // 网易 请求成功状态码
 const OK_163 = 200
 
+const isTrue = v => v === true
+
 module.exports = {
   axios: require('./axios/index.js'),
   Route: require('./route.js'),
   Tips: require('./tips.js'),
   commonParams,
   OK_QQ,
-  OK_163
+  OK_163,
+  isTrue
 }

@@ -1,11 +1,10 @@
 const { Lyric } = require('../../model/index.js')
-const config = require('../../config/index.js')
-const { Tips, OK_163 } = require('../../util/index.js')
+const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 歌词 网易
 
 module.exports = async (ctx, next, axios) => {
-  const { id, format: ft = config.format } = ctx.query
+  const { id, format } = ctx.query
   const params = {
     id
   }
@@ -19,7 +18,7 @@ module.exports = async (ctx, next, axios) => {
     .then(res => {
       const { code, lrc } = res
       if (code === OK_163) {
-        const data = ft === 'open' ? new Lyric(lrc.lyric) : lrc
+        const data = isTrue(format) ? new Lyric(lrc.lyric) : lrc
         ctx.body = {
           data,
           ...Tips[163]

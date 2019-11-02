@@ -1,6 +1,5 @@
 const { Lyric } = require('../../model/index.js')
-const config = require('../../config/index.js')
-const { Tips, commonParams, OK_QQ } = require('../../util/index.js')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 
 // 歌词 qq
 
@@ -9,7 +8,7 @@ MusicJsonCallback_lrc = data => data;
 /* eslint-enable */
 
 module.exports = async (ctx, next, axios) => {
-  const { id, format: ft = config.format } = ctx.query
+  const { id, format } = ctx.query
   const params = Object.assign({}, commonParams, {
     jsonpCallback: 'MusicJsonCallback_lrc',
     loginUin: 0,
@@ -28,7 +27,7 @@ module.exports = async (ctx, next, axios) => {
     .then(res => {
             const { code, lyric } = eval(res); // eslint-disable-line
       if (code === OK_QQ) {
-        const data = ft === 'open' ? new Lyric(lyric) : lyric
+        const data = isTrue(format) ? new Lyric(lyric) : lyric
         ctx.body = {
           data,
           ...Tips.qq

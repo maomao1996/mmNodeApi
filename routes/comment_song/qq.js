@@ -1,11 +1,10 @@
 const { formatComment } = require('../../model/index.js')
-const config = require('../../config/index.js')
-const { Tips, commonParams, OK_QQ } = require('../../util/index.js')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 
 // 歌单列表
 
 module.exports = async (ctx, next, axios) => {
-  const { offset = 0, limit = 20, id: topid, format: ft = config.format } = ctx.query
+  const { offset = 0, limit = 20, id: topid, format } = ctx.query
 
   const params = Object.assign({}, commonParams, {
     loginUin: 0,
@@ -25,7 +24,7 @@ module.exports = async (ctx, next, axios) => {
       const { code, comment, hot_comment } = res
       if (code === OK_QQ) {
         let data = {}
-        if (ft === 'open') {
+        if (isTrue(format)) {
           data.total = comment.commenttotal
           data.comments = formatComment(comment.commentlist, 'qq')
           hot_comment && (data.hotComments = formatComment(hot_comment.commentlist, 'qq'))

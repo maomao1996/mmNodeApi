@@ -1,11 +1,10 @@
 const { formatComment } = require('../../model/index.js')
-const config = require('../../config/index.js')
-const { Tips, OK_163 } = require('../../util/index.js')
+const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 热搜 网易
 
 module.exports = async (ctx, next, axios) => {
-  const { offset = 0, limit = 20, id: rid, before: beforeTime, format: ft = config.format } = ctx.query
+  const { offset = 0, limit = 20, id: rid, before: beforeTime, format } = ctx.query
   const params = {
     offset,
     limit,
@@ -17,7 +16,7 @@ module.exports = async (ctx, next, axios) => {
       const { code, total, comments, hotComments } = res
       if (code === OK_163) {
         let data = {}
-        if (ft === 'open') {
+        if (isTrue(format)) {
           data.total = total
           data.comments = formatComment(comments, '163')
           hotComments && (data.hotComments = formatComment(hotComments, '163'))

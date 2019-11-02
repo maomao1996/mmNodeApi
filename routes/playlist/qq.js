@@ -1,12 +1,10 @@
 const { formatPlayList } = require('../../model/index.js')
-const config = require('../../config/index.js')
-const { Tips, commonParams, OK_QQ } = require('../../util/index.js')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 
 // 歌单列表
 
 module.exports = async (ctx, next, axios) => {
-  const ft = ctx.query.format || config.format
-  const { order = 'hot' } = ctx.query
+  const { order = 'hot', format } = ctx.query
   const offset = parseInt(ctx.query.offset || 0)
   const limit = parseInt(ctx.query.limit || 20)
   const params = Object.assign({}, commonParams, {
@@ -26,7 +24,7 @@ module.exports = async (ctx, next, axios) => {
     .then(res => {
       if (res.code === OK_QQ) {
         const { list, sum } = res.data
-        const data = ft === 'open' ? formatPlayList(list, 'qq') : list
+        const data = isTrue(format) ? formatPlayList(list, 'qq') : list
         ctx.body = {
           data,
           total: sum,

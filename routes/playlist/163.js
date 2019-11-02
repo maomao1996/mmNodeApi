@@ -1,12 +1,10 @@
 const { formatPlayList } = require('../../model/index.js')
-const config = require('../../config/index.js')
-const { Tips, OK_163 } = require('../../util/index.js')
+const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 排行榜 网易
 
 module.exports = async (ctx, next, axios) => {
-  const ft = ctx.query.format || config.format
-  const { order = 'hot' } = ctx.query
+  const { order = 'hot', format } = ctx.query
   const offset = parseInt(ctx.query.offset || 0)
   const limit = parseInt(ctx.query.limit || 20)
   const params = {
@@ -19,7 +17,7 @@ module.exports = async (ctx, next, axios) => {
     .then(res => {
       const { code, playlists, total } = res
       if (code === OK_163) {
-        const data = ft === 'open' ? formatPlayList(playlists, '163') : playlists
+        const data = isTrue(format) ? formatPlayList(playlists, '163') : playlists
         ctx.body = {
           data,
           total,

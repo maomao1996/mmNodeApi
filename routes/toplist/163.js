@@ -1,11 +1,10 @@
 const { formatTopList } = require('../../model/index.js')
-const config = require('../../config/index.js')
-const { Tips, OK_163 } = require('../../util/index.js')
+const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 排行榜 网易
 
 module.exports = async (ctx, next, axios) => {
-  const ft = ctx.query.format || config.format
+  const format = ctx.query.format
   const params = {
     csrf_token: ''
   }
@@ -13,7 +12,7 @@ module.exports = async (ctx, next, axios) => {
     .then(res => {
       const { code, list } = res
       if (code === OK_163) {
-        const data = ft === 'open' ? formatTopList(list, '163') : list
+        const data = isTrue(format) ? formatTopList(list, '163') : list
         ctx.body = {
           data,
           ...Tips[163]

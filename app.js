@@ -18,13 +18,17 @@ app.use(koaStatic(path.resolve(__dirname, 'static')))
 // 处理 post 请求
 app.use(KoaBody({ multipart: true }))
 
-// 参数校验
+// 参数校验 / 接口格式化配置处理
 app.use(async (ctx, next) => {
   if (/(detail|lyric)/.test(ctx.url)) {
     if (!ctx.query.id) {
       ctx.body = Tips[1001]
       return
     }
+  }
+  const { format } = ctx.query
+  if (!format || format === '') {
+    ctx.query.format = config.format
   }
   await next()
 })
