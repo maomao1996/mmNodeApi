@@ -10,5 +10,7 @@ module.exports = {
   // 歌词
   Lyric: require('./lyric.js'),
   // 歌曲 URL
-  formatSongUrl: require('./song_url.js')
+  formatSongUrl: require('./song_url.js'),
+  // 评论
+  formatComment: require('./comment_song.js')
 }
