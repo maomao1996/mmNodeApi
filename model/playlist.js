@@ -4,7 +4,7 @@
 const { Creator } = require('./base.js')
 
 class PlayList {
-  constructor ({ id, name, picUrl, creator, playCount }) {
+  constructor({ id, name, picUrl, creator, playCount }) {
     this.id = id // 歌单id
     this.name = name // 歌单名称
     this.picUrl = picUrl // 歌单封面
@@ -13,7 +13,7 @@ class PlayList {
   }
 }
 
-module.exports = function formatPlayList (data, type) {
+module.exports = function formatPlayList(data, type) {
   switch (type) {
     case 'qq':
       return data.map(

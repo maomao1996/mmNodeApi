@@ -3,7 +3,7 @@ const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 
 // 排行榜 qq
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const { id, format } = ctx.query
   const params = Object.assign({}, commonParams, {
     topid: id,

@@ -3,7 +3,7 @@ const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 
 // 热搜 qq
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
   const params = Object.assign({}, commonParams, {
     platform: 'h5',

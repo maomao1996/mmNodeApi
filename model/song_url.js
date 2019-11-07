@@ -3,13 +3,13 @@
  */
 
 class SongUrl {
-  constructor ({ id, url }) {
+  constructor({ id, url }) {
     this.id = id // 歌曲id
     this.url = url // 歌曲播放地址
   }
 }
 
-module.exports = function formatSongUrl (data, type) {
+module.exports = function formatSongUrl(data, type) {
   switch (type) {
     case 'qq':
       return data.reduce((arr, item) => {

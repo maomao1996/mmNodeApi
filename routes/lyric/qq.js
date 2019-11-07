@@ -7,7 +7,7 @@ const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 MusicJsonCallback_lrc = data => data;
 /* eslint-enable */
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const { id, format } = ctx.query
   const params = Object.assign({}, commonParams, {
     jsonpCallback: 'MusicJsonCallback_lrc',

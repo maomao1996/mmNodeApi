@@ -3,7 +3,7 @@ const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 歌曲 URL 网易
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const { uid, format } = ctx.query
   const offset = parseInt(ctx.query.offset || 0)
   const limit = parseInt(ctx.query.limit || 1000)

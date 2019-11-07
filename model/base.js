@@ -4,7 +4,7 @@
 
 // 歌曲信息
 class BaseSong {
-  constructor ({ name, singer }) {
+  constructor({ name, singer }) {
     this.name = name // 歌曲名
     this.singer = singer // 歌手名
   }
@@ -12,7 +12,7 @@ class BaseSong {
 
 // 创建者信息
 class Creator {
-  constructor ({ uid, name, picUrl }) {
+  constructor({ uid, name, picUrl }) {
     this.uid = uid // uid
     this.name = name // 名称
     this.picUrl = picUrl // 头像
@@ -21,7 +21,7 @@ class Creator {
 
 // 专辑信息
 class Album {
-  constructor ({ id, mid, name, picUrl }) {
+  constructor({ id, mid, name, picUrl }) {
     this.id = id // 专辑id
     this.mid = mid // 专辑id
     this.name = name // 专辑名
@@ -31,7 +31,7 @@ class Album {
 
 // 歌手信息
 class Singer {
-  constructor ({ id, mid, name }) {
+  constructor({ id, mid, name }) {
     this.id = id // 歌手id
     this.mid = mid // 歌手id
     this.name = name // 歌手名

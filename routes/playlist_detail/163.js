@@ -3,7 +3,7 @@ const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 歌单详情 网易
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const { id, format } = ctx.query
   const params = {
     n: 100000,

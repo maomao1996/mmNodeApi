@@ -15,13 +15,13 @@ const func = (fn, type) => {
  */
 
 module.exports = class Route {
-  constructor (name, type = null) {
+  constructor(name, type = null) {
     this.name = name
     this.type = type
     this.router = new Router()
   }
 
-  init () {
+  init() {
     const path = this.name.replace(/_/g, '/')
     fs
       .readdirSync(`./routes/${this.name}/`)

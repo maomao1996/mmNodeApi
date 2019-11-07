@@ -5,7 +5,7 @@ const { Creator } = require('./base.js')
 
 // 回复
 class Replied {
-  constructor ({ creator, repliedCommentId, content, time, likedCount }) {
+  constructor({ creator, repliedCommentId, content, time, likedCount }) {
     this.creator = creator // 回复评论创建者信息（头像、昵称、ID）
     // this.repliedCommentId = repliedCommentId // 所回复的评论id
     this.content = content // 回复评论内容
@@ -13,7 +13,7 @@ class Replied {
 }
 
 class Comment {
-  constructor ({ creator, commentId, content, time, likedCount, replied }) {
+  constructor({ creator, commentId, content, time, likedCount, replied }) {
     this.creator = creator // 评论创建者信息（头像、昵称、ID）
     this.commentId = commentId // 评论id
     this.content = content // 评论内容
@@ -23,7 +23,7 @@ class Comment {
   }
 }
 
-function formatReplied ([data], type, comment) {
+function formatReplied([data], type, comment) {
   if (!data) {
     return null
   }
@@ -50,7 +50,7 @@ function formatReplied ([data], type, comment) {
   }
 }
 
-module.exports = function formatComment (data, type) {
+module.exports = function formatComment(data, type) {
   switch (type) {
     case 'qq':
       return data.map(

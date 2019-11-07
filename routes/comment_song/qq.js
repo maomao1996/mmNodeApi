@@ -3,7 +3,7 @@ const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 
 // 歌单列表
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const { offset = 0, limit = 20, id: topid, format } = ctx.query
 
   const params = Object.assign({}, commonParams, {

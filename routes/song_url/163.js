@@ -3,7 +3,7 @@ const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 歌曲 URL 网易
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
   const { id } = ctx.request.body
   const ids = Array.isArray(id) ? id : JSON.parse(id)

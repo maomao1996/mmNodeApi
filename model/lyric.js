@@ -11,17 +11,17 @@ const timeExp = /\[(\d{2,}):(\d{2})(?:\.(\d{2,3}))?]/g
 // };
 
 module.exports = class Lyric {
-  constructor (lrc) {
+  constructor(lrc) {
     this.lrc = lrc
     this.lyric = []
     this._init()
   }
 
-  _init () {
+  _init() {
     this._initLines()
   }
 
-  _initLines () {
+  _initLines() {
     const lines = this.lrc.split('\n')
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]

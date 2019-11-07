@@ -3,7 +3,7 @@ const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 排行榜 网易
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
   const params = {
     csrf_token: ''

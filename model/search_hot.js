@@ -4,7 +4,7 @@
   * @param {Type} type music type
   */
 
-module.exports = function formatSearchHot (data, type) {
+module.exports = function formatSearchHot(data, type) {
   switch (type) {
     case 'qq':
       return data.map(item => item.k)

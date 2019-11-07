@@ -5,7 +5,7 @@
 const { BaseSong } = require('./base.js')
 
 class TopList {
-  constructor ({ id, picUrl, name, songs }) {
+  constructor({ id, picUrl, name, songs }) {
     this.id = id // id
     this.picUrl = picUrl // 图片
     this.name = name // 标题
@@ -14,7 +14,7 @@ class TopList {
 }
 
 // 格式化热门歌曲
-function formatSongs (data, type) {
+function formatSongs(data, type) {
   switch (type) {
     case 'qq':
       return data.map(
@@ -38,7 +38,7 @@ function formatSongs (data, type) {
 }
 
 // 排行榜列表格式化
-module.exports = function formatTopList (data, type) {
+module.exports = function formatTopList(data, type) {
   switch (type) {
     case 'qq':
       return data.map(item => {

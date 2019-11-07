@@ -5,7 +5,7 @@ const { Creator } = require('./base.js')
 const { formatSongs } = require('./song.js')
 
 class PlayListDetail {
-  constructor ({
+  constructor({
     id,
     name,
     picUrl,
@@ -34,7 +34,7 @@ class PlayListDetail {
   }
 }
 
-module.exports = function formatPlayListDetail (data, type) {
+module.exports = function formatPlayListDetail(data, type) {
   switch (type) {
     case 'qqTOP':
       // qq 排行榜详情

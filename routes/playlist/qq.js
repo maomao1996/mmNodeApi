@@ -3,7 +3,7 @@ const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
 
 // 歌单列表
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
   const offset = parseInt(ctx.query.offset || 0)
   const limit = parseInt(ctx.query.limit || 20)

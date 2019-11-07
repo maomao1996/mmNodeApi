@@ -15,7 +15,7 @@ const qq = axios.create({
 })
 
 // QQ请求配置
-function qqAxios (url, method, data, headers = {}) {
+function qqAxios(url, method, data, headers = {}) {
   const options = {
     url,
     method,
@@ -40,7 +40,7 @@ const netease = axios.create({
 })
 
 // 网易云请求配置
-function neteaseAxios (url, method, data, headers = {}, crypto = 'weapi') {
+function neteaseAxios(url, method, data, headers = {}, crypto = 'weapi') {
   if (crypto === 'weapi') {
     data = encrypt.weapi(data)
     url = url.replace(/\w*api/, 'weapi')

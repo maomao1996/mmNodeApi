@@ -5,7 +5,7 @@ const { Tips, OK_QQ, commonParams, isTrue } = require('../../util/index.js')
 
 const getGuid = () => '' + (Math.round(Math.random() * 1e10) * new Date().getUTCMilliseconds()) % 1e9
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
   const { id } = ctx.request.body
   const songmid = Array.isArray(id) ? id : JSON.parse(id)

@@ -4,7 +4,7 @@
 const { BaseSong, Album, Singer } = require('./base.js')
 
 class Song extends BaseSong {
-  constructor ({ id, mid, name, singer, album, duration, musicType, privilege = null }) {
+  constructor({ id, mid, name, singer, album, duration, musicType, privilege = null }) {
     super({ name, singer }) // 歌曲名称 歌手
     this.id = id // 歌曲ID
     this.mid = mid // 歌曲ID
@@ -18,7 +18,7 @@ class Song extends BaseSong {
 }
 
 // 格式化歌手
-function formatSinger (singers) {
+function formatSinger(singers) {
   return singers.reduce((arr, item) => {
     arr.push(
       new Singer({
@@ -31,7 +31,7 @@ function formatSinger (singers) {
   }, [])
 }
 
-function filterSinger (singers) {
+function filterSinger(singers) {
   const arr = []
   singers.forEach(item => {
     arr.push(item.name)
@@ -40,7 +40,7 @@ function filterSinger (singers) {
 }
 
 // 格式化歌曲数据
-function formatSongs (data, type) {
+function formatSongs(data, type) {
   switch (type) {
     case 'qq':
       return data.reduce((arr, item) => {

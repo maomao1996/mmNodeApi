@@ -3,7 +3,7 @@ const { Tips, OK_163, isTrue } = require('../../util/index.js')
 
 // 热搜 网易
 
-module.exports = async (ctx, next, axios) => {
+module.exports = async(ctx, next, axios) => {
   const { offset = 0, limit = 20, id: rid, before: beforeTime, format } = ctx.query
   const params = {
     offset,
