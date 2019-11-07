@@ -1,11 +1,9 @@
 /**
   * 热搜类模型
-  * @param {Type} data 来源数据
-  * @param {Type} type music type
   */
 
-module.exports = function formatSearchHot(data, type) {
-  switch (type) {
+module.exports = function formatSearchHot(data, platform) {
+  switch (platform) {
     case 'qq':
       return data.map(item => item.k)
     case '163':

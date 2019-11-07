@@ -14,8 +14,8 @@ class TopList {
 }
 
 // 格式化热门歌曲
-function formatSongs(data, type) {
-  switch (type) {
+function formatSongs(data, platform) {
+  switch (platform) {
     case 'qq':
       return data.map(
         item =>
@@ -38,11 +38,11 @@ function formatSongs(data, type) {
 }
 
 // 排行榜列表格式化
-module.exports = function formatTopList(data, type) {
-  switch (type) {
+module.exports = function formatTopList(data, platform) {
+  switch (platform) {
     case 'qq':
       return data.map(item => {
-        const songs = formatSongs(item.songList, type)
+        const songs = formatSongs(item.songList, platform)
         return new TopList({
           id: item.id,
           picUrl: item.picUrl,
@@ -52,7 +52,7 @@ module.exports = function formatTopList(data, type) {
       })
     case '163':
       return data.map(item => {
-        const songs = formatSongs(item.tracks, type)
+        const songs = formatSongs(item.tracks, platform)
         return new TopList({
           id: item.id,
           picUrl: item.coverImgUrl,

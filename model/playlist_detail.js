@@ -34,8 +34,8 @@ class PlayListDetail {
   }
 }
 
-module.exports = function formatPlayListDetail(data, type) {
-  switch (type) {
+module.exports = function formatPlayListDetail(data, platform) {
+  switch (platform) {
     case 'qqTOP':
       // qq 排行榜详情
       return new PlayListDetail({
@@ -50,7 +50,7 @@ module.exports = function formatPlayListDetail(data, type) {
         playCount: null,
         shareCount: null,
         commentCount: data.comment_num,
-        songList: formatSongs(data.songlist, 'qq')
+        songList: formatSongs(data.songlist, platform)
       })
     case 'qq':
       // qq 歌单详情
@@ -70,7 +70,7 @@ module.exports = function formatPlayListDetail(data, type) {
         playCount: data.visitnum,
         shareCount: null,
         commentCount: null,
-        songList: formatSongs(data.songlist, 'qq')
+        songList: formatSongs(data.songlist, platform)
       })
     case '163':
       return new PlayListDetail({
@@ -89,7 +89,7 @@ module.exports = function formatPlayListDetail(data, type) {
         playCount: data.playCount,
         shareCount: data.shareCount,
         commentCount: data.commentCount,
-        songList: formatSongs(data.tracks, '163')
+        songList: formatSongs(data.tracks, platform)
       })
     default:
       return data

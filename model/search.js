@@ -3,14 +3,14 @@
   */
 const { formatSongs } = require('./song')
 
-module.exports = function formatSearch(data, musicType, type) {
+module.exports = function formatSearch(data, platform, type) {
   switch (type) {
     case 'song':
-      switch (musicType) {
+      switch (platform) {
         case 'qq':
-          return formatSongs(data, musicType)
+          return formatSongs(data, platform)
         case '163':
-          return formatSongs(data, musicType)
+          return formatSongs(data, platform)
         default:
           return data
       }

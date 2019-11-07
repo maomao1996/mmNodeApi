@@ -9,8 +9,8 @@ class SongUrl {
   }
 }
 
-module.exports = function formatSongUrl(data, type) {
-  switch (type) {
+module.exports = function formatSongUrl(data, platform) {
+  switch (platform) {
     case 'qq':
       return data.reduce((arr, item) => {
         arr.push(new SongUrl({ id: item.songmid, url: item.purl }))

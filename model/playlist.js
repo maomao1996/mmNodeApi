@@ -4,17 +4,18 @@
 const { Creator } = require('./base.js')
 
 class PlayList {
-  constructor({ id, name, picUrl, creator, playCount }) {
+  constructor({ id, name, picUrl, creator, playCount, platform }) {
     this.id = id // 歌单id
     this.name = name // 歌单名称
     this.picUrl = picUrl // 歌单封面
     this.creator = creator // 歌单创建者信息（头像、昵称、ID）
     this.playCount = playCount // 播放数
+    this.platform = platform // 来源平台
   }
 }
 
-module.exports = function formatPlayList(data, type) {
-  switch (type) {
+module.exports = function formatPlayList(data, platform) {
+  switch (platform) {
     case 'qq':
       return data.map(
         item =>
@@ -27,7 +28,8 @@ module.exports = function formatPlayList(data, type) {
               name: item.creator.name,
               picUrl: item.creator.avatarUrl
             }),
-            playCount: item.listennum
+            playCount: item.listennum,
+            platform
           })
       )
     case '163':
@@ -42,7 +44,8 @@ module.exports = function formatPlayList(data, type) {
               name: item.creator.nickname,
               picUrl: item.creator.avatarUrl
             }),
-            playCount: item.playCount
+            playCount: item.playCount,
+            platform
           })
       )
     default:

@@ -1,11 +1,11 @@
 module.exports = {
   qq: {
     code: 0,
-    musicType: 'qq'
+    platform: 'qq'
   },
   163: {
     code: 0,
-    musicType: '163'
+    platform: '163'
   },
   1001: {
     code: 1001,

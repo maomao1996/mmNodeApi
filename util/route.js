@@ -1,7 +1,7 @@
 const fs = require('fs')
 const Router = require('koa-router')
 const axios = require('./axios/index.js')
-const { musicType } = require('../config/index.js')
+const { platform } = require('../config/index.js')
 
 // 路由包装函数
 const func = (fn, type) => {
@@ -34,7 +34,7 @@ module.exports = class Route {
           this.router.get(`/${fileName}`, func(require(`../routes/${this.name}/${file}`), fileName))
         }
       })
-    this.router.redirect('/', `/${path}/${musicType}`)
+    this.router.redirect('/', `/${path}/${platform}`)
     return this.router
   }
 }

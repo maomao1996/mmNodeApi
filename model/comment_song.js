@@ -23,11 +23,11 @@ class Comment {
   }
 }
 
-function formatReplied([data], type, comment) {
+function formatReplied([data], platform, comment) {
   if (!data) {
     return null
   }
-  switch (type) {
+  switch (platform) {
     case 'qq':
       return new Replied({
         creator: new Creator({
@@ -50,8 +50,8 @@ function formatReplied([data], type, comment) {
   }
 }
 
-module.exports = function formatComment(data, type) {
-  switch (type) {
+module.exports = function formatComment(data, platform) {
+  switch (platform) {
     case 'qq':
       return data.map(
         item => {
@@ -66,7 +66,7 @@ module.exports = function formatComment(data, type) {
             content: isReplied ? item.middlecommentcontent[0].subcommentcontent : item.rootcommentcontent,
             time: item.time,
             likedCount: item.praisenum,
-            replied: isReplied ? formatReplied(item.middlecommentcontent, 'qq', item) : null
+            replied: isReplied ? formatReplied(item.middlecommentcontent, platform, item) : null
           })
         }
       )
@@ -83,7 +83,7 @@ module.exports = function formatComment(data, type) {
             content: item.content,
             time: item.time,
             likedCount: item.likedCount,
-            replied: formatReplied(item.beReplied, '163')
+            replied: formatReplied(item.beReplied, platform)
           })
       )
     default:

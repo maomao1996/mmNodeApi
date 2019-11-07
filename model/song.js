@@ -4,7 +4,7 @@
 const { BaseSong, Album, Singer } = require('./base.js')
 
 class Song extends BaseSong {
-  constructor({ id, mid, name, singer, album, duration, musicType, privilege = null }) {
+  constructor({ id, mid, name, singer, album, duration, platform, privilege = null }) {
     super({ name, singer }) // 歌曲名称 歌手
     this.id = id // 歌曲ID
     this.mid = mid // 歌曲ID
@@ -13,7 +13,7 @@ class Song extends BaseSong {
     if (privilege !== null) {
       this.privilege = privilege // 是否能播放
     }
-    this.musicType = musicType // 来源平台
+    this.platform = platform // 来源平台
   }
 }
 
@@ -40,8 +40,8 @@ function filterSinger(singers) {
 }
 
 // 格式化歌曲数据
-function formatSongs(data, type) {
-  switch (type) {
+function formatSongs(data, platform) {
+  switch (platform) {
     case 'qq':
       return data.reduce((arr, item) => {
         const obj = item.data ? item.data : item
@@ -59,7 +59,7 @@ function formatSongs(data, type) {
                 picUrl: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${obj.albummid}.jpg?max_age=2592000`
               }),
               duration: obj.interval,
-              musicType: 'qq'
+              platform
             })
           )
         }
@@ -84,7 +84,7 @@ function formatSongs(data, type) {
                 picUrl: album.picUrl || null
               }),
               duration: duration / 1000,
-              musicType: '163'
+              platform
             })
           )
         }

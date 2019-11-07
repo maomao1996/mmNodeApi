@@ -5,4 +5,4 @@ exports.PORT = process.env.PORT || 3163
 exports.format = true
 
 // 默认平台
-exports.musicType = 'qq'
+exports.platform = '163'
