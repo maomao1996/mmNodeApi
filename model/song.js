@@ -68,19 +68,22 @@ function formatSongs(data, type) {
     case '163':
       return data.reduce((arr, item) => {
         if (item.id) {
+          const singer = item.ar || item.artists
+          const album = item.al || item.album
+          const duration = item.dt || item.duration
           arr.push(
             new Song({
               id: item.id,
               mid: item.id,
               name: item.name,
-              singer: formatSinger(item.ar),
+              singer: formatSinger(singer),
               album: new Album({
-                id: item.al.id,
-                mid: item.al.id,
-                name: item.al.name,
-                picUrl: item.al.picUrl || null
+                id: album.id,
+                mid: album.id,
+                name: album.name,
+                picUrl: album.picUrl || null
               }),
-              duration: item.dt / 1000,
+              duration: duration / 1000,
               musicType: '163'
             })
           )

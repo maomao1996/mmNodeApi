@@ -1,4 +1,6 @@
 module.exports = {
+  // 搜索
+  formatSearch: require('./search.js'),
   // 搜索热词
   formatSearchHot: require('./search_hot.js'),
   // 排行榜
