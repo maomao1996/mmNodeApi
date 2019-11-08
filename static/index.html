@@ -23,6 +23,9 @@
       h1 {
         font-size: 3rem;
       }
+      p {
+        margin-bottom: 1rem;
+      }
       .desc {
         padding-top: 1.8rem;
         font-size: 1.6rem;
@@ -39,8 +42,7 @@
         text-align: center;
         line-height: 1.7;
       }
-      a,
-      .desc a {
+      a {
         color: #3eaf7c;
       }
     </style>
@@ -49,6 +51,9 @@
     <header>
       <h1>mmNodeApi</h1>
       <p class="desc">NodeJS 版 API</p>
+      <a href="https://github.com/maomao1996/mmNodeApi" target="_brank"
+        >Github</a
+      >
     </header>
     <main>
       <ol id="container"></ol>
@@ -56,7 +61,10 @@
     <script>
       window.onload = () => {
         const data = {
-          搜索: ['/search/qq?keywords=五月天', '/search/163?keywords=五月天'],
+          搜索歌曲: [
+            '/search/qq?keywords=五月天',
+            '/search/163?keywords=五月天'
+          ],
           热搜: ['/search/hot/qq', '/search/hot/163'],
           排行榜: ['/toplist/qq', '/toplist/163'],
           排行榜详情: [
@@ -77,12 +85,18 @@
             '/comment/song/163?id=169185'
           ]
         }
+        const platforms = ['QQ', '网易']
         const domArr = Object.keys(data).map(item => {
-          let q = data[item][0] ? `<a href="${data[item][0]}">QQ</a>` : '',
-            n = data[item][1]
-              ? `&nbsp;/&nbsp;<a href="${data[item][1]}">网易</a>`
-              : ''
-          return `<li>${item}：${q}${n}</li>`
+          const val = platforms
+            .reduce((arr, v, i) => {
+              const url = data[item][i]
+              if (url) {
+                arr.push(`<a href="${url}">${v}</a>`)
+              }
+              return arr
+            }, [])
+            .join('&nbsp;/&nbsp;')
+          return `<li>${item}：${val}</li>`
         })
         document.querySelector('#container').innerHTML = domArr.join('')
       }
