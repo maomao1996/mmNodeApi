@@ -5,10 +5,11 @@
 const { BaseSong } = require('./base.js')
 
 class TopList {
-  constructor({ id, picUrl, name, songs }) {
+  constructor({ id, picUrl, name, songs, platform }) {
     this.id = id // id
     this.picUrl = picUrl // 图片
     this.name = name // 标题
+    this.platform = platform // 来源平台
     this.songs = songs // 热门歌曲列表
   }
 }
@@ -47,6 +48,7 @@ module.exports = function formatTopList(data, platform) {
           id: item.id,
           picUrl: item.picUrl,
           name: item.topTitle,
+          platform,
           songs
         })
       })
@@ -57,6 +59,7 @@ module.exports = function formatTopList(data, platform) {
           id: item.id,
           picUrl: item.coverImgUrl,
           name: item.name,
+          platform,
           songs
         })
       })
