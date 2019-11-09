@@ -50,7 +50,7 @@ module.exports = function formatPlayListDetail(data, platform) {
         playCount: null,
         shareCount: null,
         commentCount: data.comment_num,
-        songList: formatSongs(data.songlist, platform)
+        songList: formatSongs(data.songlist, 'qq')
       })
     case 'qq':
       // qq 歌单详情
