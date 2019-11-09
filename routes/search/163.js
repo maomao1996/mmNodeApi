@@ -4,7 +4,8 @@ const { Tips, OK_163, isTrue } = require('../../util/index.js')
 // 搜索 网易
 
 const TYPE_MAP = {
-  song: 1
+  song: 1,
+  playlist: 1000
 }
 
 module.exports = async(ctx, next, axios) => {
@@ -25,15 +26,22 @@ module.exports = async(ctx, next, axios) => {
     .then(res => {
       const { code, result } = res
       if (code === OK_163) {
-        const data = isTrue(format) ? formatSearch(result.songs, '163', type) : result.songs
-        ctx.body = {
+        const body = {
           type,
           offset,
           limit,
-          data,
-          total: result.songCount,
-          ...Tips[163]
+          ...Tips.qq
         }
+        if (type === 'song') {
+          body.data = isTrue(format) ? formatSearch(result.songs, '163', type) : result.songs
+          body.total = result.songCount
+        } else if (type === 'playlist') {
+          body.data = isTrue(format) ? formatSearch(result.playlists, '163', type) : result.playlists
+          body.total = result.playlistCount
+        } else {
+          body.data = result
+        }
+        ctx.body = body
       } else {
         ctx.body = res
       }

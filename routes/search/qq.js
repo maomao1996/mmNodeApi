@@ -61,6 +61,9 @@ module.exports = async(ctx, next, axios) => {
         if (type === 'song') {
           body.data = isTrue(format) ? formatSearch(data.song.list, 'qq', type) : data.song.list
           body.total = data.song.totalnum
+        } else if (type === 'playlist') {
+          body.data = isTrue(format) ? formatSearch(data.list, 'qq', type) : data.list
+          body.total = data.sum
         } else {
           body.data = data
         }

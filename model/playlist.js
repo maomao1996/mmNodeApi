@@ -26,7 +26,7 @@ module.exports = function formatPlayList(data, platform) {
             creator: new Creator({
               uid: item.creator.encrypt_uin,
               name: item.creator.name,
-              picUrl: item.creator.avatarUrl
+              picUrl: item.creator.avatarUrl || null
             }),
             playCount: item.listennum,
             platform
