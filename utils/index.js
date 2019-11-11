@@ -16,9 +16,9 @@ const OK_163 = 200
 const isTrue = v => v === true
 
 module.exports = {
-  axios: require('./axios/index.js'),
-  Route: require('./route.js'),
-  Tips: require('./tips.js'),
+  axios: require('./axios'),
+  Route: require('./route'),
+  Tips: require('./tips'),
   commonParams,
   OK_QQ,
   OK_163,

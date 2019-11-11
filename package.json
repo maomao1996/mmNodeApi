@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "lint": "eslint --fix --ext .js config model routes util app.js"
+    "lint": "eslint --fix --ext .js config model routes utils app.js"
   },
   "repository": {
     "type": "git",

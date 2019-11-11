@@ -1,9 +1,11 @@
-const { formatSongUrl } = require('../../model/index.js')
-const { Tips, OK_QQ, commonParams, isTrue } = require('../../util/index.js')
+const { formatSongUrl } = require('../../model')
+const { Tips, OK_QQ, commonParams, isTrue } = require('../../utils')
 
 // 歌曲 URL qq
 
-const getGuid = () => '' + (Math.round(Math.random() * 1e10) * new Date().getUTCMilliseconds()) % 1e9
+const getGuid = () =>
+  '' +
+  ((Math.round(Math.random() * 1e10) * new Date().getUTCMilliseconds()) % 1e9)
 
 module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
@@ -34,15 +36,17 @@ module.exports = async(ctx, next, axios) => {
     }
   }
   await axios(
-        `https://u.y.qq.com/cgi-bin/musicu.fcg?_=${Date.now()}`,
-        'post',
-        { comm, url_mid: urlMid },
-        { host: '' }
+    `https://u.y.qq.com/cgi-bin/musicu.fcg?_=${Date.now()}`,
+    'post',
+    { comm, url_mid: urlMid },
+    { host: '' }
   )
     .then(res => {
       if (res.code === OK_QQ) {
         const midurlinfo = res.url_mid.data.midurlinfo
-        const data = isTrue(format) ? formatSongUrl(midurlinfo, 'qq') : midurlinfo
+        const data = isTrue(format)
+          ? formatSongUrl(midurlinfo, 'qq')
+          : midurlinfo
         ctx.body = {
           data,
           ...Tips.qq

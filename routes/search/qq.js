@@ -1,5 +1,5 @@
-const { formatSearch } = require('../../model/index.js')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
+const { formatSearch } = require('../../model')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
 
 // 搜索 qq
 
@@ -49,7 +49,7 @@ module.exports = async(ctx, next, axios) => {
   const limit = parseInt(ctx.query.limit || 20)
   const { params, url } = getParams(type, keywords, offset, limit)
   await axios(url, 'get', params)
-    .then((res) => {
+    .then(res => {
       const { code, data } = res
       if (code === OK_QQ) {
         const body = {
@@ -59,10 +59,14 @@ module.exports = async(ctx, next, axios) => {
           ...Tips.qq
         }
         if (type === 'song') {
-          body.data = isTrue(format) ? formatSearch(data.song.list, 'qq', type) : data.song.list
+          body.data = isTrue(format)
+            ? formatSearch(data.song.list, 'qq', type)
+            : data.song.list
           body.total = data.song.totalnum
         } else if (type === 'playlist') {
-          body.data = isTrue(format) ? formatSearch(data.list, 'qq', type) : data.list
+          body.data = isTrue(format)
+            ? formatSearch(data.list, 'qq', type)
+            : data.list
           body.total = data.sum
         } else {
           body.data = data

@@ -1,7 +1,7 @@
 const axios = require('axios')
 const querystring = require('querystring')
-const encrypt = require('./crypto.js')
-const { randomUserAgent } = require('../util.js')
+const encrypt = require('./crypto')
+const { randomUserAgent } = require('../utils')
 
 // 网络请求配置
 

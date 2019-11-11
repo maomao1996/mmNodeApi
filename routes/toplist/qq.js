@@ -1,5 +1,5 @@
-const { formatTopList } = require('../../model/index.js')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
+const { formatTopList } = require('../../model')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
 
 // 排行榜 qq
 
@@ -13,7 +13,9 @@ module.exports = async(ctx, next, axios) => {
   await axios('/v8/fcg-bin/fcg_myqq_toplist.fcg', 'get', params)
     .then(res => {
       if (res.code === OK_QQ) {
-        const data = isTrue(format) ? formatTopList(res.data.topList, 'qq') : res.data.topList
+        const data = isTrue(format)
+          ? formatTopList(res.data.topList, 'qq')
+          : res.data.topList
         ctx.body = {
           data,
           ...Tips.qq

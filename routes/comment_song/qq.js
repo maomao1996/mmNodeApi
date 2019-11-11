@@ -1,5 +1,5 @@
-const { formatComment } = require('../../model/index.js')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
+const { formatComment } = require('../../model')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
 
 // 歌单列表
 
@@ -27,7 +27,8 @@ module.exports = async(ctx, next, axios) => {
         if (isTrue(format)) {
           data.total = comment.commenttotal
           data.comments = formatComment(comment.commentlist, 'qq')
-          hot_comment && (data.hotComments = formatComment(hot_comment.commentlist, 'qq'))
+          hot_comment &&
+            (data.hotComments = formatComment(hot_comment.commentlist, 'qq'))
         } else {
           data = res
         }

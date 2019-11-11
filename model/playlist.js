@@ -1,7 +1,7 @@
 /**
  * 歌单列表类模型
  */
-const { Creator } = require('./base.js')
+const { Creator } = require('./base')
 
 class PlayList {
   constructor({ id, name, picUrl, creator, playCount, platform }) {

@@ -1,10 +1,16 @@
-const { formatComment } = require('../../model/index.js')
-const { Tips, OK_163, isTrue } = require('../../util/index.js')
+const { formatComment } = require('../../model')
+const { Tips, OK_163, isTrue } = require('../../utils')
 
 // 热搜 网易
 
 module.exports = async(ctx, next, axios) => {
-  const { offset = 0, limit = 20, id: rid, before: beforeTime, format } = ctx.query
+  const {
+    offset = 0,
+    limit = 20,
+    id: rid,
+    before: beforeTime,
+    format
+  } = ctx.query
   const params = {
     offset,
     limit,

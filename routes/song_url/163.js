@@ -1,5 +1,5 @@
-const { formatSongUrl } = require('../../model/index.js')
-const { Tips, OK_163, isTrue } = require('../../util/index.js')
+const { formatSongUrl } = require('../../model')
+const { Tips, OK_163, isTrue } = require('../../utils')
 
 // 歌曲 URL 网易
 

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const Router = require('koa-router')
-const { Route } = require('../util/index.js')
+const { Route } = require('../utils')
 
 const router = new Router()
 
@@ -8,8 +8,7 @@ const router = new Router()
 const POSTRouterFileMap = ['song_url']
 
 // 读取 routes 目录中的文件, 根据命名规则自动注册路由
-fs
-  .readdirSync('./routes/')
+fs.readdirSync('./routes/')
   .reverse()
   .forEach(file => {
     if (/^(?!.*\.js)/.test(file)) {

@@ -1,5 +1,5 @@
-const { formatSearch } = require('../../model/index.js')
-const { Tips, OK_163, isTrue } = require('../../util/index.js')
+const { formatSearch } = require('../../model')
+const { Tips, OK_163, isTrue } = require('../../utils')
 
 // 搜索 网易
 
@@ -33,10 +33,14 @@ module.exports = async(ctx, next, axios) => {
           ...Tips.qq
         }
         if (type === 'song') {
-          body.data = isTrue(format) ? formatSearch(result.songs, '163', type) : result.songs
+          body.data = isTrue(format)
+            ? formatSearch(result.songs, '163', type)
+            : result.songs
           body.total = result.songCount
         } else if (type === 'playlist') {
-          body.data = isTrue(format) ? formatSearch(result.playlists, '163', type) : result.playlists
+          body.data = isTrue(format)
+            ? formatSearch(result.playlists, '163', type)
+            : result.playlists
           body.total = result.playlistCount
         } else {
           body.data = result

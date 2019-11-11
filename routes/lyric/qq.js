@@ -1,10 +1,10 @@
-const { Lyric } = require('../../model/index.js')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
+const { Lyric } = require('../../model')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
 
 // 歌词 qq
 
 /* eslint-disable */
-MusicJsonCallback_lrc = data => data;
+MusicJsonCallback_lrc = data => data
 /* eslint-enable */
 
 module.exports = async(ctx, next, axios) => {
@@ -25,7 +25,7 @@ module.exports = async(ctx, next, axios) => {
   })
   await axios('/lyric/fcgi-bin/fcg_query_lyric_new.fcg', 'get', params)
     .then(res => {
-            const { code, lyric } = eval(res); // eslint-disable-line
+      const { code, lyric } = eval(res) // eslint-disable-line
       if (code === OK_QQ) {
         const data = isTrue(format) ? new Lyric(lyric) : lyric
         ctx.body = {

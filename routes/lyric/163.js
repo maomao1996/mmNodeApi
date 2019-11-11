@@ -1,5 +1,5 @@
-const { Lyric } = require('../../model/index.js')
-const { Tips, OK_163, isTrue } = require('../../util/index.js')
+const { Lyric } = require('../../model')
+const { Tips, OK_163, isTrue } = require('../../utils')
 
 // 歌词 网易
 

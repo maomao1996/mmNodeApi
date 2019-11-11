@@ -1,5 +1,5 @@
-const { formatPlayListDetail } = require('../../model/index.js')
-const { Tips, OK_163, isTrue } = require('../../util/index.js')
+const { formatPlayListDetail } = require('../../model')
+const { Tips, OK_163, isTrue } = require('../../utils')
 
 // 歌单详情 网易
 
@@ -15,7 +15,9 @@ module.exports = async(ctx, next, axios) => {
     .then(res => {
       const { code, playlist } = res
       if (code === OK_163) {
-        const data = isTrue(format) ? formatPlayListDetail(playlist, '163') : playlist
+        const data = isTrue(format)
+          ? formatPlayListDetail(playlist, '163')
+          : playlist
         ctx.body = {
           data,
           ...Tips[163]

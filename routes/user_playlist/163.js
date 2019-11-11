@@ -1,5 +1,5 @@
-const { formatPlayList } = require('../../model/index.js')
-const { Tips, OK_163, isTrue } = require('../../util/index.js')
+const { formatPlayList } = require('../../model')
+const { Tips, OK_163, isTrue } = require('../../utils')
 
 // 歌曲 URL 网易
 
@@ -15,7 +15,9 @@ module.exports = async(ctx, next, axios) => {
   await axios('/weapi/user/playlist', 'post', params)
     .then(res => {
       if (res.code === OK_163) {
-        const data = isTrue(format) ? formatPlayList(res.playlist, '163') : res.playlist
+        const data = isTrue(format)
+          ? formatPlayList(res.playlist, '163')
+          : res.playlist
         ctx.body = {
           data,
           ...Tips[163]

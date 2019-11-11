@@ -1,7 +1,7 @@
 /**
  * 评论列表类模型
  */
-const { Creator } = require('./base.js')
+const { Creator } = require('./base')
 
 // 回复
 class Replied {
@@ -53,23 +53,25 @@ function formatReplied([data], platform, comment) {
 module.exports = function formatComment(data, platform) {
   switch (platform) {
     case 'qq':
-      return data.map(
-        item => {
-          const isReplied = !!item.middlecommentcontent
-          return new Comment({
-            creator: new Creator({
-              uid: item.uin,
-              name: item.nick,
-              picUrl: item.avatarurl
-            }),
-            commentId: item.commentid,
-            content: isReplied ? item.middlecommentcontent[0].subcommentcontent : item.rootcommentcontent,
-            time: item.time,
-            likedCount: item.praisenum,
-            replied: isReplied ? formatReplied(item.middlecommentcontent, platform, item) : null
-          })
-        }
-      )
+      return data.map(item => {
+        const isReplied = !!item.middlecommentcontent
+        return new Comment({
+          creator: new Creator({
+            uid: item.uin,
+            name: item.nick,
+            picUrl: item.avatarurl
+          }),
+          commentId: item.commentid,
+          content: isReplied
+            ? item.middlecommentcontent[0].subcommentcontent
+            : item.rootcommentcontent,
+          time: item.time,
+          likedCount: item.praisenum,
+          replied: isReplied
+            ? formatReplied(item.middlecommentcontent, platform, item)
+            : null
+        })
+      })
     case '163':
       return data.map(
         item =>

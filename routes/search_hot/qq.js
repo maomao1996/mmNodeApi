@@ -1,5 +1,5 @@
-const { formatSearchHot } = require('../../model/index.js')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
+const { formatSearchHot } = require('../../model')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
 
 // 热搜 qq
 
@@ -13,7 +13,9 @@ module.exports = async(ctx, next, axios) => {
   await axios('/splcloud/fcgi-bin/gethotkey.fcg', 'get', params)
     .then(res => {
       if (res.code === OK_QQ) {
-        const data = isTrue(format) ? formatSearchHot(res.data.hotkey, 'qq') : res.data.hotkey
+        const data = isTrue(format)
+          ? formatSearchHot(res.data.hotkey, 'qq')
+          : res.data.hotkey
         ctx.body = {
           data,
           ...Tips.qq

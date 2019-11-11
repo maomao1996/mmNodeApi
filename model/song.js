@@ -1,10 +1,19 @@
 /**
  * 歌曲类模型
  */
-const { BaseSong, Album, Singer } = require('./base.js')
+const { BaseSong, Album, Singer } = require('./base')
 
 class Song extends BaseSong {
-  constructor({ id, mid, name, singer, album, duration, platform, privilege = null }) {
+  constructor({
+    id,
+    mid,
+    name,
+    singer,
+    album,
+    duration,
+    platform,
+    privilege = null
+  }) {
     super({ name, singer }) // 歌曲名称 歌手
     this.id = id // 歌曲ID
     this.mid = mid // 歌曲ID

@@ -3,9 +3,9 @@ const koaStatic = require('koa-static')
 const KoaBody = require('koa-body')
 const path = require('path')
 const cors = require('koa2-cors')
-const config = require('./config/index.js')
-const router = require('./routes/index.js')
-const Tips = require('./util/tips.js')
+const config = require('./config')
+const router = require('./routes')
+const Tips = require('./utils')
 
 const app = new Koa()
 

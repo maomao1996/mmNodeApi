@@ -2,7 +2,7 @@
  * 排行榜类模型
  */
 
-const { BaseSong } = require('./base.js')
+const { BaseSong } = require('./base')
 
 class TopList {
   constructor({ id, picUrl, name, songs, platform }) {

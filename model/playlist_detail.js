@@ -1,8 +1,8 @@
 /**
  * 歌单详情类模型
  */
-const { Creator } = require('./base.js')
-const { formatSongs } = require('./song.js')
+const { Creator } = require('./base')
+const { formatSongs } = require('./song')
 
 class PlayListDetail {
   constructor({

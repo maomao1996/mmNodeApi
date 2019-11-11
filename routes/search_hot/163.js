@@ -1,5 +1,5 @@
-const { formatSearchHot } = require('../../model/index.js')
-const { Tips, OK_163, isTrue } = require('../../util/index.js')
+const { formatSearchHot } = require('../../model')
+const { Tips, OK_163, isTrue } = require('../../utils')
 
 // 热搜 网易
 
@@ -12,7 +12,9 @@ module.exports = async(ctx, next, axios) => {
     .then(res => {
       const { code, result } = res
       if (code === OK_163) {
-        const data = isTrue(format) ? formatSearchHot(result.hots, '163') : result.hots
+        const data = isTrue(format)
+          ? formatSearchHot(result.hots, '163')
+          : result.hots
         ctx.body = {
           data,
           ...Tips[163]

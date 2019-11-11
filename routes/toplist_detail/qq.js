@@ -1,5 +1,5 @@
-const { formatPlayListDetail } = require('../../model/index.js')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../util/index.js')
+const { formatPlayListDetail } = require('../../model')
+const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
 
 // 排行榜 qq
 

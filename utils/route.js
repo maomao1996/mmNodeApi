@@ -1,7 +1,7 @@
 const fs = require('fs')
 const Router = require('koa-router')
-const axios = require('./axios/index.js')
-const { platform } = require('../config/index.js')
+const axios = require('./axios')
+const { platform } = require('../config')
 
 // 路由包装函数
 const func = (fn, type) => {
@@ -23,15 +23,20 @@ module.exports = class Route {
 
   init() {
     const path = this.name.replace(/_/g, '/')
-    fs
-      .readdirSync(`./routes/${this.name}/`)
+    fs.readdirSync(`./routes/${this.name}/`)
       .reverse()
       .forEach(file => {
         const fileName = file.replace(/.js/, '')
         if (this.type === 'post') {
-          this.router.post(`/${fileName}`, func(require(`../routes/${this.name}/${file}`), fileName))
+          this.router.post(
+            `/${fileName}`,
+            func(require(`../routes/${this.name}/${file}`), fileName)
+          )
         } else {
-          this.router.get(`/${fileName}`, func(require(`../routes/${this.name}/${file}`), fileName))
+          this.router.get(
+            `/${fileName}`,
+            func(require(`../routes/${this.name}/${file}`), fileName)
+          )
         }
       })
     this.router.redirect('/', `/${path}/${platform}`)
