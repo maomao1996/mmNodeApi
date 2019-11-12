@@ -5,7 +5,7 @@ const path = require('path')
 const cors = require('koa2-cors')
 const config = require('./config')
 const router = require('./routes')
-const Tips = require('./utils')
+const { Tips } = require('./utils')
 
 const app = new Koa()
 
@@ -17,6 +17,15 @@ app.use(koaStatic(path.resolve(__dirname, 'static')))
 
 // 处理 post 请求
 app.use(KoaBody({ multipart: true }))
+
+// 异常处理
+app.use(async(ctx, next) => {
+  try {
+    await next()
+  } catch (err) {
+    ctx.body = Tips[1000]
+  }
+})
 
 // 参数校验 / 接口格式化配置处理
 app.use(async(ctx, next) => {
