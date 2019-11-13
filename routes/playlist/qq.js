@@ -1,7 +1,7 @@
 const { formatPlayList } = require('../../model')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
+const { Tips, commonParams, isTrue } = require('../../utils')
 
-// 歌单列表
+// 分类歌单 qq
 
 module.exports = async(ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
@@ -20,21 +20,19 @@ module.exports = async(ctx, next, axios) => {
     sin: offset, // 偏移数量
     ein: parseInt(offset + limit - 1) // 返回数量
   })
-  await axios('/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg', 'get', params)
-    .then(res => {
-      if (res.code === OK_QQ) {
-        const { list, sum } = res.data
-        const data = isTrue(format) ? formatPlayList(list, 'qq') : list
-        ctx.body = {
-          data,
-          total: sum,
-          offset,
-          limit,
-          ...Tips.qq
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+  const res = await axios(
+    '/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg',
+    'get',
+    params
+  )
+
+  const { list, sum } = res.data
+  const data = isTrue(format) ? formatPlayList(list, 'qq') : list
+  ctx.body = {
+    data,
+    total: sum,
+    offset,
+    limit,
+    ...Tips.qq
+  }
 }

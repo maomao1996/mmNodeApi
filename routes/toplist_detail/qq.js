@@ -1,10 +1,11 @@
 const { formatPlayListDetail } = require('../../model')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
+const { Tips, commonParams, isTrue } = require('../../utils')
 
-// 排行榜 qq
+// 排行榜详情 qq
 
 module.exports = async(ctx, next, axios) => {
   const { id, format } = ctx.query
+
   const params = Object.assign({}, commonParams, {
     topid: id,
     needNewCode: 1,
@@ -14,17 +15,11 @@ module.exports = async(ctx, next, axios) => {
     type: 'top',
     platform: 'yqq'
   })
-  await axios('/v8/fcg-bin/fcg_v8_toplist_cp.fcg', 'get', params)
-    .then(res => {
-      if (res.code === OK_QQ) {
-        const data = isTrue(format) ? formatPlayListDetail(res, 'qqTOP') : res
-        ctx.body = {
-          data,
-          ...Tips.qq
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(e => ctx.throw(500))
+  const res = await axios('/v8/fcg-bin/fcg_v8_toplist_cp.fcg', 'get', params)
+
+  const data = isTrue(format) ? formatPlayListDetail(res, 'qqTOP') : res
+  ctx.body = {
+    data,
+    ...Tips.qq
+  }
 }

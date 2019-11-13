@@ -1,5 +1,5 @@
 const { formatSearch } = require('../../model')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
+const { Tips, commonParams, isTrue } = require('../../utils')
 
 // 搜索 qq
 
@@ -48,33 +48,24 @@ module.exports = async(ctx, next, axios) => {
   const offset = parseInt(ctx.query.offset || 0)
   const limit = parseInt(ctx.query.limit || 20)
   const { params, url } = getParams(type, keywords, offset, limit)
-  await axios(url, 'get', params)
-    .then(res => {
-      const { code, data } = res
-      if (code === OK_QQ) {
-        const body = {
-          type,
-          offset,
-          limit,
-          ...Tips.qq
-        }
-        if (type === 'song') {
-          body.data = isTrue(format)
-            ? formatSearch(data.song.list, 'qq', type)
-            : data.song.list
-          body.total = data.song.totalnum
-        } else if (type === 'playlist') {
-          body.data = isTrue(format)
-            ? formatSearch(data.list, 'qq', type)
-            : data.list
-          body.total = data.sum
-        } else {
-          body.data = data
-        }
-        ctx.body = body
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+  const { data } = await axios(url, 'get', params)
+
+  const body = {
+    type,
+    offset,
+    limit,
+    ...Tips.qq
+  }
+  if (type === 'song') {
+    body.data = isTrue(format)
+      ? formatSearch(data.song.list, 'qq', type)
+      : data.song.list
+    body.total = data.song.totalnum
+  } else if (type === 'playlist') {
+    body.data = isTrue(format) ? formatSearch(data.list, 'qq', type) : data.list
+    body.total = data.sum
+  } else {
+    body.data = data
+  }
+  ctx.body = body
 }

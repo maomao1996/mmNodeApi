@@ -1,5 +1,5 @@
 const { Lyric } = require('../../model')
-const { Tips, OK_163, isTrue } = require('../../utils')
+const { Tips, isTrue } = require('../../utils')
 
 // 歌词 网易
 
@@ -8,24 +8,17 @@ module.exports = async(ctx, next, axios) => {
   const params = {
     id
   }
-  await axios(
+  const { lrc } = await axios(
     '/weapi/song/lyric?lv=-1&kv=-1&tv=-1',
     'post',
     params,
     {},
     'linuxapi'
   )
-    .then(res => {
-      const { code, lrc } = res
-      if (code === OK_163) {
-        const data = isTrue(format) ? new Lyric(lrc.lyric) : lrc
-        ctx.body = {
-          data,
-          ...Tips[163]
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+
+  const data = isTrue(format) ? new Lyric(lrc.lyric) : lrc
+  ctx.body = {
+    data,
+    ...Tips[163]
+  }
 }

@@ -1,7 +1,7 @@
 const { formatPlayList } = require('../../model')
-const { Tips, OK_163, isTrue } = require('../../utils')
+const { Tips, isTrue } = require('../../utils')
 
-// 歌曲 URL 网易
+// 用户歌单列表 网易
 
 module.exports = async(ctx, next, axios) => {
   const { uid, format } = ctx.query
@@ -12,19 +12,13 @@ module.exports = async(ctx, next, axios) => {
     limit,
     offset
   }
-  await axios('/weapi/user/playlist', 'post', params)
-    .then(res => {
-      if (res.code === OK_163) {
-        const data = isTrue(format)
-          ? formatPlayList(res.playlist, '163')
-          : res.playlist
-        ctx.body = {
-          data,
-          ...Tips[163]
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+  const res = await axios('/weapi/user/playlist', 'post', params)
+
+  const data = isTrue(format)
+    ? formatPlayList(res.playlist, '163')
+    : res.playlist
+  ctx.body = {
+    data,
+    ...Tips[163]
+  }
 }

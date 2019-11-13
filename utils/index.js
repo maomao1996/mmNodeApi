@@ -1,3 +1,5 @@
+const code = require('./code')
+
 // qq 请求参数
 const commonParams = {
   g_tk: 1928093487,
@@ -7,12 +9,6 @@ const commonParams = {
   format: 'json'
 }
 
-// qq 请求成功状态码
-const OK_QQ = 0
-
-// 网易 请求成功状态码
-const OK_163 = 200
-
 const isTrue = v => v === true
 
 module.exports = {
@@ -20,7 +16,6 @@ module.exports = {
   Route: require('./route'),
   Tips: require('./tips'),
   commonParams,
-  OK_QQ,
-  OK_163,
-  isTrue
+  isTrue,
+  ...code
 }

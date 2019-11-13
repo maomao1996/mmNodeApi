@@ -1,5 +1,5 @@
 const { Lyric } = require('../../model')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
+const { Tips, commonParams, isTrue } = require('../../utils')
 
 // 歌词 qq
 
@@ -23,18 +23,17 @@ module.exports = async(ctx, next, axios) => {
     songmid: id,
     nobase64: 1
   })
-  await axios('/lyric/fcgi-bin/fcg_query_lyric_new.fcg', 'get', params)
-    .then(res => {
-      const { code, lyric } = eval(res) // eslint-disable-line
-      if (code === OK_QQ) {
-        const data = isTrue(format) ? new Lyric(lyric) : lyric
-        ctx.body = {
-          data,
-          ...Tips.qq
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+  const res = await axios(
+    '/lyric/fcgi-bin/fcg_query_lyric_new.fcg',
+    'get',
+    params
+  )
+
+  const { lyric } = eval(res) // eslint-disable-line
+  // console.log(eval(res))
+  const data = isTrue(format) ? new Lyric(lyric) : lyric
+  ctx.body = {
+    data,
+    ...Tips.qq
+  }
 }

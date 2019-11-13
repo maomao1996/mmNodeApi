@@ -1,5 +1,5 @@
 // 随机生成浏览器标识
-function randomUserAgent() {
+exports.randomUserAgent = () => {
   const userAgentList = [
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
     'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
@@ -25,6 +25,4 @@ function randomUserAgent() {
   return userAgentList[num]
 }
 
-module.exports = {
-  randomUserAgent
-}
+exports.isPlainObject = val => toString.call(val) === '[object Object]'

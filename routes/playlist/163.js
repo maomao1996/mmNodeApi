@@ -1,7 +1,7 @@
 const { formatPlayList } = require('../../model')
-const { Tips, OK_163, isTrue } = require('../../utils')
+const { Tips, isTrue } = require('../../utils')
 
-// 排行榜 网易
+// 分类歌单 网易
 
 module.exports = async(ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
@@ -13,23 +13,15 @@ module.exports = async(ctx, next, axios) => {
     offset, // 偏移数量
     limit // 返回数量
   }
-  await axios('/weapi/playlist/list', 'post', params)
-    .then(res => {
-      const { code, playlists, total } = res
-      if (code === OK_163) {
-        const data = isTrue(format)
-          ? formatPlayList(playlists, '163')
-          : playlists
-        ctx.body = {
-          data,
-          total,
-          offset,
-          limit,
-          ...Tips[163]
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+  const res = await axios('/weapi/playlist/list', 'post', params)
+
+  const { playlists, total } = res
+  const data = isTrue(format) ? formatPlayList(playlists, '163') : playlists
+  ctx.body = {
+    data,
+    total,
+    offset,
+    limit,
+    ...Tips[163]
+  }
 }

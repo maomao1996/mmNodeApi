@@ -1,25 +1,16 @@
 const { formatTopList } = require('../../model')
-const { Tips, OK_163, isTrue } = require('../../utils')
+const { Tips, isTrue } = require('../../utils')
 
 // 排行榜 网易
 
 module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
-  const params = {
-    csrf_token: ''
+  const params = { csrf_token: '' }
+  const { list } = await axios('/weapi/toplist/detail', 'post', params)
+
+  const data = isTrue(format) ? formatTopList(list, '163') : list
+  ctx.body = {
+    data,
+    ...Tips[163]
   }
-  await axios('/weapi/toplist/detail', 'post', params)
-    .then(res => {
-      const { code, list } = res
-      if (code === OK_163) {
-        const data = isTrue(format) ? formatTopList(list, '163') : list
-        ctx.body = {
-          data,
-          ...Tips[163]
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
 }

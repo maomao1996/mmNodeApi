@@ -1,5 +1,5 @@
 const { formatSearch } = require('../../model')
-const { Tips, OK_163, isTrue } = require('../../utils')
+const { Tips, isTrue } = require('../../utils')
 
 // 搜索 网易
 
@@ -22,33 +22,26 @@ module.exports = async(ctx, next, axios) => {
     limit,
     s
   }
-  await axios('/weapi/search/get', 'post', params)
-    .then(res => {
-      const { code, result } = res
-      if (code === OK_163) {
-        const body = {
-          type,
-          offset,
-          limit,
-          ...Tips.qq
-        }
-        if (type === 'song') {
-          body.data = isTrue(format)
-            ? formatSearch(result.songs, '163', type)
-            : result.songs
-          body.total = result.songCount
-        } else if (type === 'playlist') {
-          body.data = isTrue(format)
-            ? formatSearch(result.playlists, '163', type)
-            : result.playlists
-          body.total = result.playlistCount
-        } else {
-          body.data = result
-        }
-        ctx.body = body
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+  const { result } = await axios('/weapi/search/get', 'post', params)
+
+  const body = {
+    type,
+    offset,
+    limit,
+    ...Tips.qq
+  }
+  if (type === 'song') {
+    body.data = isTrue(format)
+      ? formatSearch(result.songs, '163', type)
+      : result.songs
+    body.total = result.songCount
+  } else if (type === 'playlist') {
+    body.data = isTrue(format)
+      ? formatSearch(result.playlists, '163', type)
+      : result.playlists
+    body.total = result.playlistCount
+  } else {
+    body.data = result
+  }
+  ctx.body = body
 }

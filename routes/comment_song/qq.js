@@ -1,7 +1,7 @@
 const { formatComment } = require('../../model')
-const { Tips, commonParams, OK_QQ, isTrue } = require('../../utils')
+const { Tips, commonParams, isTrue } = require('../../utils')
 
-// 歌单列表
+// 歌曲评论 qq
 
 module.exports = async(ctx, next, axios) => {
   const { offset = 0, limit = 20, id: topid, format } = ctx.query
@@ -19,26 +19,24 @@ module.exports = async(ctx, next, axios) => {
     pagenum: offset / limit,
     pagesize: limit
   })
-  await axios('/base/fcgi-bin/fcg_global_comment_h5.fcg', 'get', params)
-    .then(res => {
-      const { code, comment, hot_comment } = res
-      if (code === OK_QQ) {
-        let data = {}
-        if (isTrue(format)) {
-          data.total = comment.commenttotal
-          data.comments = formatComment(comment.commentlist, 'qq')
-          hot_comment &&
-            (data.hotComments = formatComment(hot_comment.commentlist, 'qq'))
-        } else {
-          data = res
-        }
-        ctx.body = {
-          data,
-          ...Tips.qq
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+  const res = await axios(
+    '/base/fcgi-bin/fcg_global_comment_h5.fcg',
+    'get',
+    params
+  )
+
+  const { comment, hot_comment } = res
+  let data = {}
+  if (isTrue(format)) {
+    data.total = comment.commenttotal
+    data.comments = formatComment(comment.commentlist, 'qq')
+    hot_comment &&
+      (data.hotComments = formatComment(hot_comment.commentlist, 'qq'))
+  } else {
+    data = res
+  }
+  ctx.body = {
+    data,
+    ...Tips.qq
+  }
 }

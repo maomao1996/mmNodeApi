@@ -1,5 +1,5 @@
 const { formatSongUrl } = require('../../model')
-const { Tips, OK_QQ, commonParams, isTrue } = require('../../utils')
+const { Tips, commonParams, isTrue } = require('../../utils')
 
 // 歌曲 URL qq
 
@@ -35,25 +35,17 @@ module.exports = async(ctx, next, axios) => {
       songtype
     }
   }
-  await axios(
+  const res = await axios(
     `https://u.y.qq.com/cgi-bin/musicu.fcg?_=${Date.now()}`,
     'post',
     { comm, url_mid: urlMid },
     { host: '' }
   )
-    .then(res => {
-      if (res.code === OK_QQ) {
-        const midurlinfo = res.url_mid.data.midurlinfo
-        const data = isTrue(format)
-          ? formatSongUrl(midurlinfo, 'qq')
-          : midurlinfo
-        ctx.body = {
-          data,
-          ...Tips.qq
-        }
-      } else {
-        ctx.body = res
-      }
-    })
-    .catch(() => ctx.throw(500))
+
+  const midurlinfo = res.url_mid.data.midurlinfo
+  const data = isTrue(format) ? formatSongUrl(midurlinfo, 'qq') : midurlinfo
+  ctx.body = {
+    data,
+    ...Tips.qq
+  }
 }

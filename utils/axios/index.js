@@ -1,7 +1,8 @@
 const axios = require('axios')
 const querystring = require('querystring')
 const encrypt = require('./crypto')
-const { randomUserAgent } = require('../utils')
+const { randomUserAgent, isPlainObject } = require('../utils')
+const { HTTP_CODE_MAP } = require('../code')
 
 // 网络请求配置
 
@@ -11,7 +12,8 @@ const qq = axios.create({
     Referer: 'https://c.y.qq.com/',
     Host: 'c.y.qq.com',
     'User-Agent': randomUserAgent()
-  }
+  },
+  platform: 'qq'
 })
 
 // QQ请求配置
@@ -36,7 +38,8 @@ const netease = axios.create({
     Host: 'music.163.com',
     Origin: 'https://music.163.com',
     'User-Agent': randomUserAgent()
-  }
+  },
+  platform: 'netease'
 })
 
 // 网易云请求配置
@@ -65,6 +68,13 @@ function neteaseAxios(url, method, data, headers = {}, crypto = 'weapi') {
   item.interceptors.response.use(
     response => {
       console.log(`${response.config.method} ${response.config.url}`)
+      if (
+        item.defaults.platform &&
+        isPlainObject(response.data) &&
+        response.data.code !== HTTP_CODE_MAP[item.defaults.platform]
+      ) {
+        return Promise.reject(response)
+      }
       return response.data
     },
     error => Promise.reject(error)
