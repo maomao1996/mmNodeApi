@@ -27,17 +27,19 @@ module.exports = class Lyric {
       const line = lines[i]
       const result = timeExp.exec(line)
       if (result) {
-        const txt = line.replace(timeExp, '').trim()
-        if (txt) {
+        const text = line.replace(timeExp, '').trim()
+        if (text) {
+          const plus = n =>
+            result[1] * 6e4 + result[2] * 1e3 + (result[3] || 0) * n
           if (this.type === 'qq') {
             this.lyric.push({
-              time: result[1] * 60 * 1000 + result[2] * 1000 + (result[3] || 0) * 10,
-              txt
+              time: plus(10),
+              text
             })
           } else {
             this.lyric.push({
-              time: Number(result[1] * 60 * 1000) + Number(result[2] * 1000) + Number(result[3] || 0),
-              txt
+              time: plus(1),
+              text
             })
           }
         }
