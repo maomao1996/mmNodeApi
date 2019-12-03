@@ -1,5 +1,5 @@
 const { formatSearch } = require('../../model')
-const { Tips, commonParams, isTrue } = require('../../utils')
+const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 搜索 qq
 
@@ -34,7 +34,7 @@ const getParams = (type, keywords, offset, limit) => {
     }
   }
   return {
-    params: Object.assign({}, commonParams, obj),
+    params: mergeQQParams(obj),
     url
   }
 }

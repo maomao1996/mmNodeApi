@@ -1,12 +1,12 @@
 const { formatPlayListDetail } = require('../../model')
-const { Tips, commonParams, isTrue } = require('../../utils')
+const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 排行榜详情 qq
 
 module.exports = async(ctx, next, axios) => {
   const { id, format } = ctx.query
 
-  const params = Object.assign({}, commonParams, {
+  const params = mergeQQParams({
     topid: id,
     needNewCode: 1,
     uin: 0,

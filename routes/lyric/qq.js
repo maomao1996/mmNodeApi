@@ -1,5 +1,5 @@
 const { Lyric } = require('../../model')
-const { Tips, commonParams, isTrue } = require('../../utils')
+const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 歌词 qq
 
@@ -9,7 +9,7 @@ MusicJsonCallback_lrc = data => data
 
 module.exports = async(ctx, next, axios) => {
   const { id, format } = ctx.query
-  const params = Object.assign({}, commonParams, {
+  const params = mergeQQParams({
     jsonpCallback: 'MusicJsonCallback_lrc',
     loginUin: 0,
     hostUin: 0,
@@ -19,7 +19,6 @@ module.exports = async(ctx, next, axios) => {
     needNewCode: 0,
     callback: 'MusicJsonCallback_lrc',
     pcachetime: +new Date(),
-    g_tk: 181969821,
     songmid: id,
     nobase64: 1
   })

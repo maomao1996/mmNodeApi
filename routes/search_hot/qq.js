@@ -1,11 +1,11 @@
 const { formatSearchHot } = require('../../model')
-const { Tips, commonParams, isTrue } = require('../../utils')
+const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 热搜 qq
 
 module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
-  const params = Object.assign({}, commonParams, {
+  const params = mergeQQParams({
     platform: 'h5',
     uin: 0,
     needNewCode: 1

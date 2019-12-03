@@ -14,9 +14,9 @@ fs.readdirSync('./routes/')
     if (/^(?!.*\.js)/.test(file)) {
       const fileName = file.replace(/_/g, '/')
       if (POSTRouterFileMap.includes(file)) {
-        router.use(`/${fileName}`, new Route(file, 'post').init().routes())
+        router.use(`/${fileName}`, new Route(file, 'post'))
       } else {
-        router.use(`/${fileName}`, new Route(file).init().routes())
+        router.use(`/${fileName}`, new Route(file))
       }
     }
   })

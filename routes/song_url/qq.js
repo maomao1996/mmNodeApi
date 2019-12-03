@@ -1,5 +1,5 @@
 const { formatSongUrl } = require('../../model')
-const { Tips, commonParams, isTrue } = require('../../utils')
+const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 歌曲 URL qq
 
@@ -15,8 +15,7 @@ module.exports = async(ctx, next, axios) => {
   songmid.forEach(item => {
     songtype.push(0)
   })
-  const comm = Object.assign({}, commonParams, {
-    g_tk: 5381,
+  const comm = mergeQQParams({
     platform: 'h5',
     needNewCode: 1,
     notice: 0,

@@ -25,4 +25,17 @@ exports.randomUserAgent = () => {
   return userAgentList[num]
 }
 
+// qq 请求参数
+const commonParams = {
+  g_tk: 5381,
+  inCharset: 'utf-8',
+  outCharset: 'utf-8',
+  notice: 0,
+  format: 'json'
+}
+// 合并 qq 请求参数
+exports.mergeQQParams = o => ({...commonParams, ...o})
+
 exports.isPlainObject = val => toString.call(val) === '[object Object]'
+
+exports.isTrue = v => v === true

@@ -1,12 +1,12 @@
 const { formatComment } = require('../../model')
-const { Tips, commonParams, isTrue } = require('../../utils')
+const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 歌曲评论 qq
 
 module.exports = async(ctx, next, axios) => {
   const { offset = 0, limit = 20, id: topid, format } = ctx.query
 
-  const params = Object.assign({}, commonParams, {
+  const params = mergeQQParams({
     loginUin: 0,
     hostUin: 0,
     platform: 'yqq.json',

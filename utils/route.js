@@ -15,10 +15,11 @@ const func = (fn, type) => {
  */
 
 module.exports = class Route {
-  constructor(name, type = null) {
+  constructor(name, type = 'get') {
     this.name = name
     this.type = type
     this.router = new Router()
+    return this.init()
   }
 
   init() {
@@ -27,19 +28,12 @@ module.exports = class Route {
       .reverse()
       .forEach(file => {
         const fileName = file.replace(/.js/, '')
-        if (this.type === 'post') {
-          this.router.post(
-            `/${fileName}`,
-            func(require(`../routes/${this.name}/${file}`), fileName)
-          )
-        } else {
-          this.router.get(
-            `/${fileName}`,
-            func(require(`../routes/${this.name}/${file}`), fileName)
-          )
-        }
+        this.router[this.type](
+          `/${fileName}`,
+          func(require(`../routes/${this.name}/${file}`), fileName)
+        )
       })
     this.router.redirect('/', `/${path}/${platform}`)
-    return this.router
+    return this.router.routes()
   }
 }

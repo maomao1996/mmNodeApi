@@ -1,5 +1,5 @@
 const { formatPlayList } = require('../../model')
-const { Tips, commonParams, isTrue } = require('../../utils')
+const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 分类歌单 qq
 
@@ -7,10 +7,9 @@ module.exports = async(ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
   const offset = parseInt(ctx.query.offset || 0)
   const limit = parseInt(ctx.query.limit || 20)
-  const params = Object.assign({}, commonParams, {
+  const params = mergeQQParams({
     picmid: 1,
     rnd: Math.random(),
-    g_tk: 452748401,
     loginUin: 0,
     hostUin: 0,
     platform: 'yqq',
