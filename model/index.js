@@ -14,5 +14,7 @@ module.exports = {
   // 歌曲 URL
   formatSongUrl: require('./song_url'),
   // 评论
-  formatComment: require('./comment_song')
+  formatComment: require('./comment_song'),
+  // 歌手列表
+  formatSingerList: require('./singer_list')
 }

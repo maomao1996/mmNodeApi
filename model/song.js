@@ -1,7 +1,7 @@
 /**
  * 歌曲类模型
  */
-const { BaseSong, Album, Singer } = require('./base')
+const { BaseSong, Album, BaseSinger } = require('./base')
 
 class Song extends BaseSong {
   constructor({
@@ -30,7 +30,7 @@ class Song extends BaseSong {
 function formatSinger(singers) {
   return singers.reduce((arr, item) => {
     arr.push(
-      new Singer({
+      new BaseSinger({
         id: item.id,
         mid: item.id,
         name: item.name

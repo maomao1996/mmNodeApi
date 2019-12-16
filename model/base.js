@@ -30,7 +30,7 @@ class Album {
 }
 
 // 歌手信息
-class Singer {
+class BaseSinger {
   constructor({ id, mid, name }) {
     this.id = id // 歌手id
     this.mid = mid // 歌手id
@@ -42,5 +42,5 @@ module.exports = {
   BaseSong,
   Creator,
   Album,
-  Singer
+  BaseSinger
 }
