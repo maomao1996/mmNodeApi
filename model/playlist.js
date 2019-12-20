@@ -48,6 +48,22 @@ module.exports = function formatPlayList(data, platform) {
             platform
           })
       )
+    case 'migu':
+      return data.map(
+        item =>
+          new PlayList({
+            id: item.id,
+            name: item.name,
+            picUrl: item.musicListPicUrl,
+            creator: new Creator({
+              uid: item.userId,
+              name: null,
+              picUrl: null
+            }),
+            playCount: item.musicNum,
+            platform
+          })
+      )
     default:
       return data
   }

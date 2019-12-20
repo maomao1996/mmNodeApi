@@ -99,6 +99,31 @@ function formatSongs(data, platform) {
         }
         return arr
       }, [])
+    case 'migu':
+      return data.reduce((arr, item) => {
+        if (item.id) {
+          const album = (item.albums || [])[0] || {}
+          const imgItems =
+            item.imgItems.find(v => v.imgSizeType === '01') || item.imgItems[0]
+          arr.push(
+            new Song({
+              id: item.id,
+              mid: item.contentId,
+              name: item.name,
+              singer: formatSinger(item.singers),
+              album: new Album({
+                id: album.id,
+                mid: album.id,
+                name: album.name,
+                picUrl: imgItems.img || null
+              }),
+              duration: null,
+              platform
+            })
+          )
+        }
+        return arr
+      }, [])
     default:
       return data
   }

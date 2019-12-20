@@ -64,7 +64,26 @@ function neteaseAxios(url, method, data, headers = {}, crypto = 'weapi') {
   return netease(options)
 }
 
-;[axios, qq, netease].forEach(item => {
+// 咪咕请求配置
+const migu = axios.create({
+  baseURL: 'http://app.pd.nf.migu.cn/MIGUM2.0/v1.0/content',
+  headers: {
+    Referer: 'http://music.migu.cn/',
+    Host: 'music.migu.cn',
+    'User-Agent': randomUserAgent()
+  }
+})
+function miguAxios(url, method, data, headers = {}) {
+  const options = {
+    url,
+    method,
+    headers,
+    [`${method === 'get' ? 'params' : 'data'}`]: data
+  }
+  return migu(options)
+}
+
+;[axios, qq, netease, migu].forEach(item => {
   item.interceptors.response.use(
     response => {
       console.log(`${response.config.method} ${response.config.url}`)
@@ -84,5 +103,6 @@ function neteaseAxios(url, method, data, headers = {}, crypto = 'weapi') {
 module.exports = {
   qq: qqAxios,
   netease: neteaseAxios,
+  migu: miguAxios,
   axios
 }
