@@ -5,13 +5,13 @@ const { Tips, isTrue } = require('../../utils')
 
 module.exports = async(ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
-  const offset = parseInt(ctx.query.offset || 0)
-  const limit = parseInt(ctx.query.limit || 20)
+  const page = parseInt(ctx.query.page || 0)
+  const size = parseInt(ctx.query.size || 20)
   const params = {
     cat: '全部',
     order, // 热门 hot / 最新 new
-    offset, // 偏移数量
-    limit // 返回数量
+    offset: page * size, // 偏移数量
+    limit: size // 返回数量
   }
   const res = await axios('/weapi/playlist/list', 'post', params)
 
@@ -20,8 +20,8 @@ module.exports = async(ctx, next, axios) => {
   ctx.body = {
     data,
     total,
-    offset,
-    limit,
+    page,
+    size,
     ...Tips[163]
   }
 }

@@ -14,21 +14,21 @@ module.exports = async(ctx, next, axios) => {
     ctx.body = Tips[1001]
     return
   }
-  const offset = parseInt(ctx.query.offset || 0)
-  const limit = parseInt(ctx.query.limit || 20)
+  const page = parseInt(ctx.query.page || 0)
+  const size = parseInt(ctx.query.size || 20)
   const params = {
     type: TYPE_MAP[type],
-    offset,
-    limit,
+    offset: page * size,
+    limit: size,
     s
   }
   const { result } = await axios('/weapi/search/get', 'post', params)
 
   const body = {
     type,
-    offset,
-    limit,
-    ...Tips.qq
+    page,
+    size,
+    ...Tips[163]
   }
   if (type === 'song') {
     body.data = isTrue(format)

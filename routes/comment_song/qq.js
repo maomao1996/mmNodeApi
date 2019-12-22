@@ -4,7 +4,7 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 // 歌曲评论 qq
 
 module.exports = async(ctx, next, axios) => {
-  const { offset = 0, limit = 20, id: topid, format } = ctx.query
+  const { page = 0, size = 20, id: topid, format } = ctx.query
 
   const params = mergeQQParams({
     loginUin: 0,
@@ -16,8 +16,8 @@ module.exports = async(ctx, next, axios) => {
     cmd: 8,
     domain: 'qq.com',
     topid,
-    pagenum: offset / limit,
-    pagesize: limit
+    pagenum: page,
+    pagesize: size
   })
   const res = await axios(
     '/base/fcgi-bin/fcg_global_comment_h5.fcg',
@@ -37,6 +37,8 @@ module.exports = async(ctx, next, axios) => {
   }
   ctx.body = {
     data,
+    page,
+    size,
     ...Tips.qq
   }
 }

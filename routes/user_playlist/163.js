@@ -5,8 +5,8 @@ const { Tips, isTrue } = require('../../utils')
 
 module.exports = async(ctx, next, axios) => {
   const { uid, format } = ctx.query
-  const offset = parseInt(ctx.query.offset || 0)
-  const limit = parseInt(ctx.query.limit || 1000)
+  const offset = 0 // parseInt(ctx.query.offset || 0)
+  const limit = 1000 // parseInt(ctx.query.limit || 1000)
   const params = {
     uid: uid,
     limit,

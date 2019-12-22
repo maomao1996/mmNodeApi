@@ -5,8 +5,8 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 module.exports = async(ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
-  const offset = parseInt(ctx.query.offset || 0)
-  const limit = parseInt(ctx.query.limit || 20)
+  const page = parseInt(ctx.query.page || 0)
+  const size = parseInt(ctx.query.size || 20)
   const params = mergeQQParams({
     picmid: 1,
     rnd: Math.random(),
@@ -16,8 +16,8 @@ module.exports = async(ctx, next, axios) => {
     needNewCode: 0,
     categoryId: 10000000,
     sortId: order === 'new' ? 2 : 5, // 热门 5 / 最新 2
-    sin: offset, // 偏移数量
-    ein: parseInt(offset + limit - 1) // 返回数量
+    sin: page * size, // 偏移数量
+    ein: (page + 1) * size - 1 // 返回数量
   })
   const res = await axios(
     '/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg',
@@ -30,8 +30,8 @@ module.exports = async(ctx, next, axios) => {
   ctx.body = {
     data,
     total: sum,
-    offset,
-    limit,
+    page,
+    size,
     ...Tips.qq
   }
 }

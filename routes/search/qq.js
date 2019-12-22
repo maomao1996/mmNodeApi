@@ -3,7 +3,7 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 搜索 qq
 
-const getParams = (type, keywords, offset, limit) => {
+const getParams = (type, keywords, page, size) => {
   let url = '/soso/fcgi-bin/search_for_qq_cp'
   let obj
   if (type === 'song') {
@@ -19,18 +19,23 @@ const getParams = (type, keywords, offset, limit) => {
       aggr: 0,
       remoteplace: 'txt.yqq.playlist',
       w: keywords,
-      p: offset / limit,
-      perpage: limit,
-      n: limit
+      p: page,
+      perpage: size,
+      n: size
     }
   } else if (type === 'playlist') {
     url = 'soso/fcgi-bin/client_music_search_songlist'
     obj = {
       remoteplace: 'txt.yqq.playlist',
+      searchid: 0,
       flag_qc: 0,
-      page_no: offset / limit,
-      num_per_page: limit,
-      query: keywords
+      page_no: page,
+      num_per_page: size,
+      query: keywords,
+      loginUin: 0,
+      hostUin: 0,
+      needNewCode: 0,
+      platform: 'yqq.json'
     }
   }
   return {
@@ -45,15 +50,15 @@ module.exports = async(ctx, next, axios) => {
     ctx.body = Tips[1001]
     return
   }
-  const offset = parseInt(ctx.query.offset || 0)
-  const limit = parseInt(ctx.query.limit || 20)
-  const { params, url } = getParams(type, keywords, offset, limit)
+  const page = parseInt(ctx.query.page || 0)
+  const size = parseInt(ctx.query.size || 20)
+  const { params, url } = getParams(type, keywords, page, size)
   const { data } = await axios(url, 'get', params)
 
   const body = {
     type,
-    offset,
-    limit,
+    page,
+    size,
     ...Tips.qq
   }
   if (type === 'song') {
