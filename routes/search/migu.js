@@ -8,22 +8,23 @@ const TYPE_MAP = {
 }
 
 module.exports = async(ctx, next, axios) => {
-  const { keywords, format, type = 'song', limit = 20 } = ctx.query
-  const offset = parseInt(ctx.query.offset || 0)
+  const { keywords, format, type = 'song' } = ctx.query
+  const page = parseInt(ctx.query.page || 0)
+  const size = parseInt(ctx.query.size || 20)
   const params = {
     ua: 'Android_migu',
     version: '5.0.1',
     text: keywords,
-    pageNo: parseInt(offset / 20) + 1,
-    pageSize: limit,
+    pageNo: page + 1,
+    pageSize: size,
     searchSwitch: TYPE_MAP[type]
     // searchSwitch: '{"song":1,"album":0,"singer":0,"tagSong":0,"mvSong":0,"songlist":0,"bestShow":0}'
   }
   const res = await axios('/search_all.do', 'get', params)
   const body = {
     type,
-    offset,
-    limit,
+    page,
+    size,
     ...Tips.migu
   }
   if (type === 'song') {

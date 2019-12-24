@@ -7,6 +7,10 @@ module.exports = {
     code: 0,
     platform: '163'
   },
+  migu: {
+    code: 0,
+    platform: 'migu'
+  },
   1000: {
     code: 1000,
     msg: '请求错误，请稍后再试'
