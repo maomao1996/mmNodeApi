@@ -37,10 +37,18 @@ module.exports = async(ctx, next, axios) => {
       Host: 'u.y.qq.com'
     }
   )
-  const { singerlist } = res.singerList.data
-  const data = isTrue(format) ? formatSingerList(singerlist, 'qq') : singerlist
+
+  if (isTrue(format)) {
+    const { singerlist } = res.singerList.data
+    ctx.body = {
+      ...Tips.qq,
+      data: formatSingerList(singerlist, 'qq')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }

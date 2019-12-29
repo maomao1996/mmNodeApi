@@ -12,11 +12,16 @@ module.exports = async(ctx, next, axios) => {
   })
   const res = await axios('/splcloud/fcgi-bin/gethotkey.fcg', 'get', params)
 
-  const data = isTrue(format)
-    ? formatSearchHot(res.data.hotkey, 'qq')
-    : res.data.hotkey
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips.qq,
+      data: formatSearchHot(res.data.hotkey, 'qq')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }

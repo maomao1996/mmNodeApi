@@ -7,6 +7,11 @@ const TYPE_MAP = {
   playlist: '{"songlist":1}'
 }
 
+const RESULT_MAP = {
+  song: 'songResultData',
+  playlist: 'songListResultData'
+}
+
 module.exports = async(ctx, next, axios) => {
   const { keywords, format, type = 'song' } = ctx.query
   const page = parseInt(ctx.query.page || 0)
@@ -21,22 +26,25 @@ module.exports = async(ctx, next, axios) => {
     // searchSwitch: '{"song":1,"album":0,"singer":0,"tagSong":0,"mvSong":0,"songlist":0,"bestShow":0}'
   }
   const res = await axios('/search_all.do', 'get', params)
-  const body = {
-    type,
-    page,
-    size,
-    ...Tips.migu
+
+  if (isTrue(format)) {
+    const data = {
+      type,
+      page,
+      size
+    }
+    const { totalCount, result } = res[RESULT_MAP[type]]
+    data.total = totalCount
+    data[`${type}s`] = formatSearch(result, 'migu', type)
+    ctx.body = {
+      ...Tips.migu,
+      data
+    }
+    return
   }
-  if (type === 'song') {
-    const { totalCount, result } = res.songResultData
-    body.data = isTrue(format) ? formatSearch(result, 'migu', type) : res
-    body.total = totalCount
-  } else if (type === 'playlist') {
-    const { totalCount, result } = res.songListResultData
-    body.data = isTrue(format) ? formatSearch(result, 'migu', type) : result
-    body.total = totalCount
-  } else {
-    body.data = res
+
+  ctx.body = {
+    ...Tips.migu,
+    ...res
   }
-  ctx.body = body
 }

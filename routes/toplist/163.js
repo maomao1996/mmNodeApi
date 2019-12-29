@@ -6,11 +6,18 @@ const { Tips, isTrue } = require('../../utils')
 module.exports = async(ctx, next, axios) => {
   const format = ctx.query.format
   const params = { csrf_token: '' }
-  const { list } = await axios('/weapi/toplist/detail', 'post', params)
+  const res = await axios('/weapi/toplist/detail', 'post', params)
 
-  const data = isTrue(format) ? formatTopList(list, '163') : list
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips[163],
+      data: formatTopList(res.list, '163')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips[163]
+    ...Tips[163],
+    ...res
   }
 }

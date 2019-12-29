@@ -11,7 +11,7 @@ module.exports = async(ctx, next, axios) => {
     csrf_token: '',
     id
   }
-  const { playlist } = await axios(
+  const res = await axios(
     '/weapi/v3/playlist/detail',
     'post',
     params,
@@ -19,9 +19,16 @@ module.exports = async(ctx, next, axios) => {
     'linuxapi'
   )
 
-  const data = isTrue(format) ? formatPlayListDetail(playlist, '163') : playlist
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips[163],
+      data: formatPlayListDetail(res.playlist, '163')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips[163]
+    ...Tips[163],
+    ...res
   }
 }

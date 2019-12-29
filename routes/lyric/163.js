@@ -8,7 +8,7 @@ module.exports = async(ctx, next, axios) => {
   const params = {
     id
   }
-  const { lrc } = await axios(
+  const res = await axios(
     '/weapi/song/lyric?lv=-1&kv=-1&tv=-1',
     'post',
     params,
@@ -16,9 +16,16 @@ module.exports = async(ctx, next, axios) => {
     'linuxapi'
   )
 
-  const data = isTrue(format) ? new Lyric(lrc.lyric) : lrc
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips[163],
+      data: new Lyric(res.lrc.lyric)
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips[163]
+    ...Tips[163],
+    ...res
   }
 }

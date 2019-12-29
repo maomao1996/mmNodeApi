@@ -22,26 +22,31 @@ module.exports = async(ctx, next, axios) => {
     limit: size,
     s
   }
-  const { result } = await axios('/weapi/search/get', 'post', params)
+  const res = await axios('/weapi/search/get', 'post', params)
 
-  const body = {
-    type,
-    page,
-    size,
-    ...Tips[163]
+  if (isTrue(format)) {
+    const { result } = res
+    const data = {
+      type,
+      page,
+      size
+    }
+    if (type === 'song') {
+      data.total = result.songCount
+      data.songs = formatSearch(result.songs, '163', type)
+    } else if (type === 'playlist') {
+      data.total = result.playlistCount
+      data.playlists = formatSearch(result.playlists, '163', type)
+    }
+    ctx.body = {
+      ...Tips[163],
+      data
+    }
+    return
   }
-  if (type === 'song') {
-    body.data = isTrue(format)
-      ? formatSearch(result.songs, '163', type)
-      : result.songs
-    body.total = result.songCount
-  } else if (type === 'playlist') {
-    body.data = isTrue(format)
-      ? formatSearch(result.playlists, '163', type)
-      : result.playlists
-    body.total = result.playlistCount
-  } else {
-    body.data = result
+
+  ctx.body = {
+    ...Tips[163],
+    ...res
   }
-  ctx.body = body
 }

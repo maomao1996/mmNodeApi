@@ -28,11 +28,19 @@ module.exports = async(ctx, next, axios) => {
     params
   )
 
-  const { lyric } = eval(res) // eslint-disable-line
+  const evalRes = eval(res) // eslint-disable-line
   // console.log(eval(res))
-  const data = isTrue(format) ? new Lyric(lyric) : lyric
+
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips.qq,
+      data: new Lyric(evalRes.lyric)
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips.qq
+    ...Tips.qq,
+    ...evalRes
   }
 }

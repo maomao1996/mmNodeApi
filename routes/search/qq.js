@@ -53,24 +53,30 @@ module.exports = async(ctx, next, axios) => {
   const page = parseInt(ctx.query.page || 0)
   const size = parseInt(ctx.query.size || 20)
   const { params, url } = getParams(type, keywords, page, size)
-  const { data } = await axios(url, 'get', params)
+  const res = await axios(url, 'get', params)
 
-  const body = {
-    type,
-    page,
-    size,
-    ...Tips.qq
+  if (isTrue(format)) {
+    const data = {
+      type,
+      page,
+      size
+    }
+    if (type === 'song') {
+      data.total = res.data.song.totalnum
+      data.songs = formatSearch(res.data.song.list, 'qq', type)
+    } else if (type === 'playlist') {
+      data.total = res.data.sum
+      data.playlists = formatSearch(res.data.list, 'qq', type)
+    }
+    ctx.body = {
+      ...Tips.qq,
+      data
+    }
+    return
   }
-  if (type === 'song') {
-    body.data = isTrue(format)
-      ? formatSearch(data.song.list, 'qq', type)
-      : data.song.list
-    body.total = data.song.totalnum
-  } else if (type === 'playlist') {
-    body.data = isTrue(format) ? formatSearch(data.list, 'qq', type) : data.list
-    body.total = data.sum
-  } else {
-    body.data = data
+
+  ctx.body = {
+    ...Tips.qq,
+    ...res
   }
-  ctx.body = body
 }

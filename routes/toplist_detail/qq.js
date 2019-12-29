@@ -17,9 +17,16 @@ module.exports = async(ctx, next, axios) => {
   })
   const res = await axios('/v8/fcg-bin/fcg_v8_toplist_cp.fcg', 'get', params)
 
-  const data = isTrue(format) ? formatPlayListDetail(res, 'qqTOP') : res
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips.qq,
+      data: formatPlayListDetail(res, 'qqTOP')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }

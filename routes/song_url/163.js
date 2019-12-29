@@ -14,9 +14,16 @@ module.exports = async(ctx, next, axios) => {
   }
   const res = await axios('/weapi/song/enhance/player/url', 'post', params)
 
-  const data = isTrue(format) ? formatSongUrl(res.data, '163') : res.data
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips[163],
+      data: formatSongUrl(res.data, '163')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips[163]
+    ...Tips[163],
+    ...res
   }
 }

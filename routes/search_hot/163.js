@@ -8,13 +8,18 @@ module.exports = async(ctx, next, axios) => {
   const params = {
     type: 1111
   }
-  const { result } = await axios('/weapi/search/hot', 'post', params)
+  const res = await axios('/weapi/search/hot', 'post', params)
 
-  const data = isTrue(format)
-    ? formatSearchHot(result.hots, '163')
-    : result.hots
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips[163],
+      data: formatSearchHot(res.result.hots, '163')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips[163]
+    ...Tips[163],
+    ...res
   }
 }

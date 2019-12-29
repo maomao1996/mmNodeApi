@@ -21,11 +21,16 @@ module.exports = async(ctx, next, axios) => {
     params
   )
 
-  const data = isTrue(format)
-    ? formatPlayListDetail(res.cdlist[0], 'qq')
-    : res.cdlist[0]
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips.qq,
+      data: formatPlayListDetail(res.cdlist[0], 'qq')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }

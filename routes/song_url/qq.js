@@ -41,10 +41,17 @@ module.exports = async(ctx, next, axios) => {
     { host: '' }
   )
 
-  const midurlinfo = res.url_mid.data.midurlinfo
-  const data = isTrue(format) ? formatSongUrl(midurlinfo, 'qq') : midurlinfo
+  if (isTrue(format)) {
+    const { midurlinfo } = res.url_mid.data
+    ctx.body = {
+      ...Tips.qq,
+      data: formatSongUrl(midurlinfo, 'qq')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }

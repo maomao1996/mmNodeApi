@@ -25,20 +25,24 @@ module.exports = async(ctx, next, axios) => {
     params
   )
 
-  const { comment, hot_comment } = res
-  let data = {}
   if (isTrue(format)) {
-    data.total = comment.commenttotal
-    data.comments = formatComment(comment.commentlist, 'qq')
-    hot_comment &&
-      (data.hotComments = formatComment(hot_comment.commentlist, 'qq'))
-  } else {
-    data = res
+    const { comment, hot_comment: hot } = res
+    const data = {
+      page,
+      size,
+      total: comment.commenttotal,
+      comments: formatComment(comment.commentlist, 'qq')
+    }
+    hot && (data.hotComments = formatComment(hot.commentlist, 'qq'))
+    ctx.body = {
+      ...Tips.qq,
+      data
+    }
+    return
   }
+
   ctx.body = {
-    data,
-    page,
-    size,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }

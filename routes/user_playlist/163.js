@@ -14,11 +14,16 @@ module.exports = async(ctx, next, axios) => {
   }
   const res = await axios('/weapi/user/playlist', 'post', params)
 
-  const data = isTrue(format)
-    ? formatPlayList(res.playlist, '163')
-    : res.playlist
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips[163],
+      data: formatPlayList(res.playlist, '163')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips[163]
+    ...Tips[163],
+    ...res
   }
 }

@@ -25,13 +25,23 @@ module.exports = async(ctx, next, axios) => {
     params
   )
 
-  const { list, sum } = res.data
-  const data = isTrue(format) ? formatPlayList(list, 'qq') : list
+  if (isTrue(format)) {
+    const { list, sum } = res.data
+    const data = {
+      page,
+      size,
+      total: sum,
+      playlists: formatPlayList(list, 'qq')
+    }
+    ctx.body = {
+      ...Tips.qq,
+      data
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    total: sum,
-    page,
-    size,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }

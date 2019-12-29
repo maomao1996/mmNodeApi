@@ -12,11 +12,16 @@ module.exports = async(ctx, next, axios) => {
   })
   const res = await axios('/v8/fcg-bin/fcg_myqq_toplist.fcg', 'get', params)
 
-  const data = isTrue(format)
-    ? formatTopList(res.data.topList, 'qq')
-    : res.data.topList
+  if (isTrue(format)) {
+    ctx.body = {
+      ...Tips.qq,
+      data: formatTopList(res.data.topList, 'qq')
+    }
+    return
+  }
+
   ctx.body = {
-    data,
-    ...Tips.qq
+    ...Tips.qq,
+    ...res
   }
 }
