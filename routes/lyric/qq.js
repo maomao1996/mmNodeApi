@@ -34,7 +34,7 @@ module.exports = async(ctx, next, axios) => {
   if (isTrue(format)) {
     ctx.body = {
       ...Tips.qq,
-      data: new Lyric(evalRes.lyric)
+      data: new Lyric(evalRes.lyric, 'qq')
     }
     return
   }

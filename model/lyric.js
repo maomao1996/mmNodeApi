@@ -11,7 +11,8 @@ const timeExp = /\[(\d{2,}):(\d{2})(?:\.(\d{2,3}))?]/g
 // };
 
 module.exports = class Lyric {
-  constructor(lrc) {
+  constructor(lrc, type = '163') {
+    this.type = type
     this.lrc = lrc
     this.lyric = []
     this._init()
