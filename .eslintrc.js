@@ -4,16 +4,9 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: ['standard'],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
-  },
+  extends: ['plugin:prettier/recommended', 'prettier'],
   parserOptions: {
-    ecmaVersion: 2018
+    ecmaVersion: 2020
   },
-  rules: {
-    'space-before-function-paren': [2, 'never'],
-    camelcase: 0
-  }
+  rules: {}
 }

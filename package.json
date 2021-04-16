@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "lint": "eslint --fix --ext .js config model routes utils app.js"
+    "lint:eslint": "eslint \"{config,model,routes,utils}/**/*.js\" app.js --fix",
+    "lint:prettier": "prettier --write --loglevel warn \"{config,model,routes,utils}/**/*.js\" app.js",
+    "lint": "npm run lint:eslint && npm run lint:prettier"
   },
   "repository": {
     "type": "git",
@@ -26,12 +28,10 @@
     "koa2-cors": "^2.0.6"
   },
   "devDependencies": {
-    "eslint": "^6.6.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "^1.19.1"
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nodemon": "^1.19.1",
+    "prettier": "^2.2.1"
   }
 }
