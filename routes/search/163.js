@@ -8,7 +8,7 @@ const TYPE_MAP = {
   playlist: 1000
 }
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { keywords: s, format, type = 'song' } = ctx.query
   if (!s) {
     ctx.body = Tips[1001]

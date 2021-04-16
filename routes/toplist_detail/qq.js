@@ -3,7 +3,7 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 排行榜详情 qq
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { id, format } = ctx.query
 
   const params = mergeQQParams({

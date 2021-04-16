@@ -19,7 +19,7 @@ app.use(koaStatic(path.resolve(__dirname, 'static')))
 app.use(KoaBody({ multipart: true }))
 
 // 异常处理
-app.use(async(ctx, next) => {
+app.use(async (ctx, next) => {
   try {
     await next()
   } catch (err) {
@@ -28,7 +28,7 @@ app.use(async(ctx, next) => {
 })
 
 // 参数校验 / 接口格式化配置处理
-app.use(async(ctx, next) => {
+app.use(async (ctx, next) => {
   if (/(detail|lyric)/.test(ctx.url)) {
     if (!ctx.query.id) {
       ctx.body = Tips[1001]

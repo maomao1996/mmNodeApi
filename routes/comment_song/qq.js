@@ -3,7 +3,7 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 歌曲评论 qq
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { page = 0, size = 20, id: topid, format } = ctx.query
 
   const params = mergeQQParams({
@@ -19,11 +19,7 @@ module.exports = async(ctx, next, axios) => {
     pagenum: page,
     pagesize: size
   })
-  const res = await axios(
-    '/base/fcgi-bin/fcg_global_comment_h5.fcg',
-    'get',
-    params
-  )
+  const res = await axios('/base/fcgi-bin/fcg_global_comment_h5.fcg', 'get', params)
 
   if (isTrue(format)) {
     const { comment, hot_comment: hot } = res

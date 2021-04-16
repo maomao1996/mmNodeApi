@@ -3,7 +3,7 @@ const { Tips, isTrue } = require('../../utils')
 
 // 排行榜 网易
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const format = ctx.query.format
   const params = { csrf_token: '' }
   const res = await axios('/weapi/toplist/detail', 'post', params)

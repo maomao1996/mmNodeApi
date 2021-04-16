@@ -30,8 +30,7 @@ module.exports = class Lyric {
       if (result) {
         const text = line.replace(timeExp, '').trim()
         if (text) {
-          const plus = n =>
-            result[1] * 6e4 + result[2] * 1e3 + (result[3] || 0) * n
+          const plus = (n) => result[1] * 6e4 + result[2] * 1e3 + (result[3] || 0) * n
           if (this.type === 'qq') {
             this.lyric.push({
               time: plus(10),

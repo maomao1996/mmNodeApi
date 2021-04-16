@@ -3,7 +3,7 @@ const { Tips, isTrue } = require('../../utils')
 
 // 热搜 网易
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const format = ctx.query.format
   const params = {
     type: 1111

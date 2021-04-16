@@ -3,7 +3,7 @@ const { Tips, isTrue } = require('../../utils')
 
 // 歌曲评论 网易
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { page = 0, size = 20, id: rid, before: beforeTime, format } = ctx.query
   const params = {
     beforeTime,
@@ -11,11 +11,7 @@ module.exports = async(ctx, next, axios) => {
     offset: page * size,
     limit: size
   }
-  const res = await axios(
-    `/api/v1/resource/comments/R_SO_4_${rid}`,
-    'post',
-    params
-  )
+  const res = await axios(`/api/v1/resource/comments/R_SO_4_${rid}`, 'post', params)
 
   if (isTrue(format)) {
     const { total, comments, hotComments } = res

@@ -1,6 +1,6 @@
 /**
-  * 搜索类模型
-  */
+ * 搜索类模型
+ */
 const { formatSongs } = require('./song')
 const formatPlayList = require('./playlist')
 

@@ -3,7 +3,7 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 歌手列表
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { format } = ctx.query
   const params = mergeQQParams({
     '-': 'getUCGI' + (Math.random() + '').replace('0.', ''),
@@ -27,16 +27,11 @@ module.exports = async(ctx, next, axios) => {
       }
     }
   })
-  const res = await axios(
-    'https://u.y.qq.com/cgi-bin/musicu.fcg',
-    'get',
-    params,
-    {
-      Origin: 'https://y.qq.com',
-      Referer: 'https://y.qq.com',
-      Host: 'u.y.qq.com'
-    }
-  )
+  const res = await axios('https://u.y.qq.com/cgi-bin/musicu.fcg', 'get', params, {
+    Origin: 'https://y.qq.com',
+    Referer: 'https://y.qq.com',
+    Host: 'u.y.qq.com'
+  })
 
   if (isTrue(format)) {
     const { singerlist } = res.singerList.data

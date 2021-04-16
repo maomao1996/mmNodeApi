@@ -4,10 +4,10 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 // 歌词 qq
 
 /* eslint-disable */
-MusicJsonCallback_lrc = data => data
+MusicJsonCallback_lrc = (data) => data
 /* eslint-enable */
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { id, format } = ctx.query
   const params = mergeQQParams({
     jsonpCallback: 'MusicJsonCallback_lrc',
@@ -22,11 +22,7 @@ module.exports = async(ctx, next, axios) => {
     songmid: id,
     nobase64: 1
   })
-  const res = await axios(
-    '/lyric/fcgi-bin/fcg_query_lyric_new.fcg',
-    'get',
-    params
-  )
+  const res = await axios('/lyric/fcgi-bin/fcg_query_lyric_new.fcg', 'get', params)
 
   const evalRes = eval(res) // eslint-disable-line
   // console.log(eval(res))

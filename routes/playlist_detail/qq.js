@@ -3,7 +3,7 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 歌单详情 qq
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { id, format } = ctx.query
   const params = mergeQQParams({
     disstid: id,
@@ -15,11 +15,7 @@ module.exports = async(ctx, next, axios) => {
     hostUin: 0,
     needNewCode: 0
   })
-  const res = await axios(
-    '/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg',
-    'get',
-    params
-  )
+  const res = await axios('/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg', 'get', params)
 
   if (isTrue(format)) {
     ctx.body = {

@@ -4,16 +4,7 @@
 const { BaseSong, Album, BaseSinger } = require('./base')
 
 class Song extends BaseSong {
-  constructor({
-    id,
-    mid,
-    name,
-    singer,
-    album,
-    duration,
-    platform,
-    privilege = null
-  }) {
+  constructor({ id, mid, name, singer, album, duration, platform, privilege = null }) {
     super({ name, singer }) // 歌曲名称 歌手
     this.id = id // 歌曲ID
     this.mid = mid // 歌曲ID
@@ -42,7 +33,7 @@ function formatSinger(singers) {
 
 function filterSinger(singers) {
   const arr = []
-  singers.forEach(item => {
+  singers.forEach((item) => {
     arr.push(item.name)
   })
   return arr.join('/')
@@ -103,8 +94,7 @@ function formatSongs(data, platform) {
       return data.reduce((arr, item) => {
         if (item.id) {
           const album = (item.albums || [])[0] || {}
-          const imgItems =
-            item.imgItems.find(v => v.imgSizeType === '01') || item.imgItems[0]
+          const imgItems = item.imgItems.find((v) => v.imgSizeType === '01') || item.imgItems[0]
           arr.push(
             new Song({
               id: item.id,

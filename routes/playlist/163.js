@@ -3,7 +3,7 @@ const { Tips, isTrue } = require('../../utils')
 
 // 分类歌单 网易
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
   const page = parseInt(ctx.query.page || 0)
   const size = parseInt(ctx.query.size || 20)

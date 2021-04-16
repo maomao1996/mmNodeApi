@@ -18,7 +18,7 @@ module.exports = function formatPlayList(data, platform) {
   switch (platform) {
     case 'qq':
       return data.map(
-        item =>
+        (item) =>
           new PlayList({
             id: item.dissid,
             name: item.dissname,
@@ -34,7 +34,7 @@ module.exports = function formatPlayList(data, platform) {
       )
     case '163':
       return data.map(
-        item =>
+        (item) =>
           new PlayList({
             id: item.id,
             name: item.name,
@@ -50,7 +50,7 @@ module.exports = function formatPlayList(data, platform) {
       )
     case 'migu':
       return data.map(
-        item =>
+        (item) =>
           new PlayList({
             id: item.id,
             name: item.name,

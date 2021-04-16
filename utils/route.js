@@ -26,7 +26,7 @@ module.exports = class Route {
     const path = this.name.replace(/_/g, '/')
     fs.readdirSync(`./routes/${this.name}/`)
       .reverse()
-      .forEach(file => {
+      .forEach((file) => {
         const fileName = file.replace(/.js/, '')
         this.router[this.type](
           `/${fileName}`,

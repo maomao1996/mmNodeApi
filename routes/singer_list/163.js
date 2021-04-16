@@ -3,7 +3,7 @@ const { Tips, isTrue } = require('../../utils')
 
 // 歌手列表
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { format } = ctx.query
   const offset = 0 // parseInt(ctx.query.offset || 0)
   const limit = 80 // parseInt(ctx.query.limit || 50)

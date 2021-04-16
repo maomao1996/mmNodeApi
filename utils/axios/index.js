@@ -83,9 +83,9 @@ function miguAxios(url, method, data, headers = {}) {
   return migu(options)
 }
 
-;[axios, qq, netease, migu].forEach(item => {
+;[axios, qq, netease, migu].forEach((item) => {
   item.interceptors.response.use(
-    response => {
+    (response) => {
       console.log(`${response.config.method} ${response.config.url}`)
       if (
         item.defaults.platform &&
@@ -96,7 +96,7 @@ function miguAxios(url, method, data, headers = {}) {
       }
       return response.data
     },
-    error => Promise.reject(error)
+    (error) => Promise.reject(error)
   )
 })
 

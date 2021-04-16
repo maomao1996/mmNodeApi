@@ -3,7 +3,7 @@ const { Tips, isTrue } = require('../../utils')
 
 // 歌词 咪咕
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { id, format } = ctx.query
   const params = {
     copyrightId: id

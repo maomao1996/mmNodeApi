@@ -53,7 +53,7 @@ function formatReplied([data], platform, comment) {
 module.exports = function formatComment(data, platform) {
   switch (platform) {
     case 'qq':
-      return data.map(item => {
+      return data.map((item) => {
         const isReplied = !!item.middlecommentcontent
         return new Comment({
           creator: new Creator({
@@ -67,14 +67,12 @@ module.exports = function formatComment(data, platform) {
             : item.rootcommentcontent,
           time: item.time,
           likedCount: item.praisenum,
-          replied: isReplied
-            ? formatReplied(item.middlecommentcontent, platform, item)
-            : null
+          replied: isReplied ? formatReplied(item.middlecommentcontent, platform, item) : null
         })
       })
     case '163':
       return data.map(
-        item =>
+        (item) =>
           new Comment({
             creator: new Creator({
               uid: item.user.userId,

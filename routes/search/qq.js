@@ -44,7 +44,7 @@ const getParams = (type, keywords, page, size) => {
   }
 }
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { keywords, format, type = 'song' } = ctx.query
   if (!keywords) {
     ctx.body = Tips[1001]

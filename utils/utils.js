@@ -34,8 +34,8 @@ const commonParams = {
   format: 'json'
 }
 // 合并 qq 请求参数
-exports.mergeQQParams = o => ({ ...commonParams, ...o })
+exports.mergeQQParams = (o) => ({ ...commonParams, ...o })
 
-exports.isPlainObject = val => toString.call(val) === '[object Object]'
+exports.isPlainObject = (val) => toString.call(val) === '[object Object]'
 
-exports.isTrue = v => v === true
+exports.isTrue = (v) => v === true

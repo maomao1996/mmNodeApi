@@ -3,7 +3,7 @@ const { Tips, isTrue } = require('../../utils')
 
 // 用户歌单列表 网易
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { uid, format } = ctx.query
   const offset = 0 // parseInt(ctx.query.offset || 0)
   const limit = 1000 // parseInt(ctx.query.limit || 1000)

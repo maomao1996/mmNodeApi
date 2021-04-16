@@ -16,7 +16,7 @@ function formatSingerList(data, platform) {
   switch (platform) {
     case 'qq':
       return data.map(
-        item =>
+        (item) =>
           new Singer({
             id: item.singer_id,
             mid: item.singer_mid,
@@ -27,7 +27,7 @@ function formatSingerList(data, platform) {
       )
     case '163':
       return data.map(
-        item =>
+        (item) =>
           new Singer({
             id: item.id,
             mid: item.id,

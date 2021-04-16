@@ -3,7 +3,7 @@ const { Tips, mergeQQParams, isTrue } = require('../../utils')
 
 // 分类歌单 qq
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { order = 'hot', format } = ctx.query
   const page = parseInt(ctx.query.page || 0)
   const size = parseInt(ctx.query.size || 20)
@@ -19,11 +19,7 @@ module.exports = async(ctx, next, axios) => {
     sin: page * size, // 偏移数量
     ein: (page + 1) * size - 1 // 返回数量
   })
-  const res = await axios(
-    '/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg',
-    'get',
-    params
-  )
+  const res = await axios('/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg', 'get', params)
 
   if (isTrue(format)) {
     const { list, sum } = res.data

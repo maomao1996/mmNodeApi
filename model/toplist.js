@@ -19,7 +19,7 @@ function formatSongs(data, platform) {
   switch (platform) {
     case 'qq':
       return data.map(
-        item =>
+        (item) =>
           new BaseSong({
             name: item.songname,
             singer: item.singername
@@ -27,7 +27,7 @@ function formatSongs(data, platform) {
       )
     case '163':
       return data.map(
-        item =>
+        (item) =>
           new BaseSong({
             name: item.first,
             singer: item.second
@@ -42,7 +42,7 @@ function formatSongs(data, platform) {
 module.exports = function formatTopList(data, platform) {
   switch (platform) {
     case 'qq':
-      return data.map(item => {
+      return data.map((item) => {
         const songs = formatSongs(item.songList, platform)
         return new TopList({
           id: item.id,
@@ -53,7 +53,7 @@ module.exports = function formatTopList(data, platform) {
         })
       })
     case '163':
-      return data.map(item => {
+      return data.map((item) => {
         const songs = formatSongs(item.tracks, platform)
         return new TopList({
           id: item.id,

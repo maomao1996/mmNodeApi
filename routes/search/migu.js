@@ -12,7 +12,7 @@ const RESULT_MAP = {
   playlist: 'songListResultData'
 }
 
-module.exports = async(ctx, next, axios) => {
+module.exports = async (ctx, next, axios) => {
   const { keywords, format, type = 'song' } = ctx.query
   const page = parseInt(ctx.query.page || 0)
   const size = parseInt(ctx.query.size || 20)
