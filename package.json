@@ -20,7 +20,7 @@
     "url": "https://github.com/maomao1996/mmNodeApi/issues"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "koa": "^2.5.2",
     "koa-body": "^4.0.4",
     "koa-router": "^7.4.0",
